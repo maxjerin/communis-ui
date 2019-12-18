@@ -2,6 +2,8 @@ import React from 'react';
 import Cookies from 'js-cookie'
 import { GLOBAL_CONSTANT } from './../utils/constants'
 import { Redirect } from "react-router-dom";
+import {connect} from 'react-redux';
+import {compose} from 'redux';
 
 
 const AuthModalPage = React.lazy(() => import('./../pages/AuthModalPage'));
@@ -14,11 +16,12 @@ const withAuthContext = (WrappedComponent) => {
         }
 
         componentWillMount() {
-            const cookie = Cookies.get(GLOBAL_CONSTANT.Cookie);
-            if(cookie){
-                this.setState({...this.state, isAuthenticated: true})
-            }
+             const cookie = Cookies.get(GLOBAL_CONSTANT.Cookie);
+             if(cookie){
+                 this.setState({...this.state, isAuthenticated: true})
+             }
         }
+
 
         render() {
             debugger;
@@ -38,4 +41,11 @@ const withAuthContext = (WrappedComponent) => {
     return HOC;
 };
 
-export default withAuthContext;
+function mapStateToProps(store){
+    return {
+
+    }
+}
+
+
+export default compose(connect(mapStateToProps,null),withAuthContext);

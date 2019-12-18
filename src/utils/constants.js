@@ -1,3 +1,14 @@
+const DOMAIN = "http://localhost:8080";
+
+export const GLOBAL_CONSTANT = {
+  Cookie: "commjwt",
+  ENDPOINTS: {
+    AUTH: DOMAIN + "/auth"
+  }
+}
+
+
+
 export const NOTIFICATION_SYSTEM_STYLE = {
   NotificationItem: {
     DefaultStyle: {
@@ -127,7 +138,3 @@ export const NOTIFICATION_SYSTEM_STYLE = {
     },
   },
 };
-
-export const GLOBAL_CONSTANT = {
-  Cookie: "commjwt"
-}

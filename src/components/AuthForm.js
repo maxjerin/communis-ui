@@ -2,8 +2,22 @@ import logo200Image from 'assets/img/logo/logo_200.png';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
+import CommunisComponent from "./CommunisComponent";
 
-class AuthForm extends React.Component {
+
+
+class AuthForm extends CommunisComponent {
+  constructor(props){
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+   this.state = {
+     form : {
+       username: null,
+       password: null
+     }
+   }
+  }
+
   get isLogin() {
     return this.props.authState === STATE_LOGIN;
   }
@@ -14,13 +28,12 @@ class AuthForm extends React.Component {
 
   changeAuthState = authState => event => {
     event.preventDefault();
-
     this.props.onChangeAuthState(authState);
   };
 
-  handleSubmit = event => {
-    debugger;
-    event.preventDefault();
+  handleSubmit() {
+    this.props.handleLoginSubmit(this.state.form);
+
   };
 
   renderButtonText() {
@@ -65,11 +78,11 @@ class AuthForm extends React.Component {
         )}
         <FormGroup>
           <Label for={usernameLabel}>{usernameLabel}</Label>
-          <Input {...usernameInputProps} />
+          <Input {...usernameInputProps} onChange={e => this.updateFormState('username',e)}/>
         </FormGroup>
         <FormGroup>
           <Label for={passwordLabel}>{passwordLabel}</Label>
-          <Input {...passwordInputProps} />
+          <Input {...passwordInputProps} onChange={e => this.updateFormState('password',e)} />
         </FormGroup>
         {this.isSignup && (
           <FormGroup>
@@ -133,11 +146,13 @@ AuthForm.defaultProps = {
   showLogo: true,
   usernameLabel: 'Email',
   usernameInputProps: {
+    id: 'username',
     type: 'email',
     placeholder: 'your@email.com',
   },
   passwordLabel: 'Password',
   passwordInputProps: {
+    id:'password',
     type: 'password',
     placeholder: 'your password',
   },
