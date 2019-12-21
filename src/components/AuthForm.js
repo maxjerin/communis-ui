@@ -1,7 +1,7 @@
 import logo200Image from 'assets/img/logo/logo_200.png';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
+import {Alert, Button, Card, CardBody, Form, FormGroup, Input, Label, UncontrolledAlert,ListGroup, ListGroupItem} from 'reactstrap';
 import CommunisComponent from "./CommunisComponent";
 
 
@@ -14,8 +14,25 @@ class AuthForm extends CommunisComponent {
      form : {
        username: null,
        password: null
-     }
+     },
+     showAlert: false,
+     alertColor: "danger",
+     alertMessage: []
    }
+  }
+
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    debugger;
+    if(nextProps.authentication){
+      switch(nextProps.authentication.responseCode){
+        case 200: break;
+        case 400: this.setState({...this.state, showAlert: true, alertColor: "warning", alertMessage:  nextProps.authentication.exception});break;
+        case 401: this.setState({...this.state, showAlert: true, alertColor: "danger", alertMessage:  nextProps.authentication.exception}); break;
+        case 403: this.setState({...this.state, showAlert: true, alertColor: "danger", alertMessage:  nextProps.authentication.exception}); break;
+        default: //do nothing
+      }
+    }
   }
 
   get isLogin() {
@@ -49,6 +66,8 @@ class AuthForm extends CommunisComponent {
 
     return buttonText;
   }
+
+  onDismiss = () => this.setState({...this.state, showAlert: false})
 
   render() {
     const {
@@ -97,6 +116,14 @@ class AuthForm extends CommunisComponent {
           </Label>
         </FormGroup>
         <hr />
+        {
+          this.state.showAlert ? <UncontrolledAlert color={this.state.alertColor} toggle={this.onDismiss}>
+            <ListGroup flush>
+              {this.state.alertMessage.map(msg =>  <ListGroupItem>{msg}</ListGroupItem>)}
+            </ListGroup>
+          </UncontrolledAlert> : null
+        }
+
         <Button
           size="lg"
           className="bg-gradient-theme-left border-0"

@@ -21,10 +21,7 @@ export function authenticateUser(username,password) {
                dispatch({type: 'AUTHENTICATE_USER_FULFILLED', payload: response.data.token})
             })
             .catch((err) => {
-                if(err.response && err.response.status ==401){
-
-                }
-                dispatch({type: "AUTHENTICATE_USER_REJECTED", payload: err})
+                dispatch({type: "AUTHENTICATE_USER_REJECTED", payload: err.response.data })
             })
     }
 }

@@ -4,8 +4,10 @@ import {connect} from 'react-redux';
 import {Card, Col, Row} from 'reactstrap';
 import {authenticateUser} from '../actions/authenticationActions';
 import {Redirect} from "react-router-dom";
+import {isExpired, setWebCookie} from './../utils/jwtTokenUtils'
 
 class AuthPage extends React.Component {
+
     handleAuthState = authState => {
         if (authState === STATE_LOGIN) {
             this.props.history.push('/login');
@@ -22,6 +24,12 @@ class AuthPage extends React.Component {
         this.props.dispatch(authenticateUser(authentication.username, authentication.password));
     }
 
+    componentWillReceiveProps(nextProps, nextContext) {
+        if(nextProps.authentication && !isExpired(nextProps.authentication.token)){
+            setWebCookie(nextProps.authentication.token);
+        }
+    }
+
     render() {
         const {
             authentication,
@@ -31,9 +39,10 @@ class AuthPage extends React.Component {
 
         if(authentication.token){
             debugger;
+            let redirectUrl = match.url ==  '/login' ? "/" : router.location.pathname;
             return <Redirect
                 to={{
-                    pathname: router.location.pathname,
+                    pathname: redirectUrl,
                     state: { from : match.url}
                 }}
             />
@@ -49,6 +58,7 @@ class AuthPage extends React.Component {
                 <Col md={6} lg={4}>
                     <Card body>
                         <AuthForm
+                            authentication = {this.props.authentication}
                             authState={this.props.authState}
                             onChangeAuthState={this.handleAuthState}
                             onLogoClick={this.handleLogoClick}
@@ -62,7 +72,6 @@ class AuthPage extends React.Component {
 }
 
 function mapStateToProps(store) {
-    debugger;
     return {
         authentication: store.authentication,
         router: store.router

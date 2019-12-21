@@ -1,7 +1,8 @@
 const initialState = {
     token : null,
     isError: false,
-    exception:""
+    responseCode: 200,
+    exception:[]
 }
 
 
@@ -15,13 +16,22 @@ const reducer = (state=initialState, action) => {
             return {...state,
                 isError:false,
                 token: action.payload,
-                exception: ""
+                responseCode: 200,
+                exception: []
             }
         }
         case "AUTHENTICATE_USER_REJECTED":{
+            let exceptions = null;
+            if(action.payload.errors){
+                exceptions = action.payload.errors.map(error => error.defaultMessage);
+            }else{
+                exceptions = [action.payload.message];
+            }
+
             return {...state,
                 isError:true,
-                exception : action.payload
+                responseCode: action.payload.status,
+                exception : exceptions
             }
         }
     }
