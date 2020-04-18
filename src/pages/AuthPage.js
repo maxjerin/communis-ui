@@ -21,7 +21,8 @@ class AuthPage extends React.Component {
     };
 
     handleLoginSubmit = (authentication) => {
-        this.props.dispatch(authenticateUser(authentication.username, authentication.password));
+        this.props.dispatch(authenticateUser("admin@communis.com", "A@12word"));
+        //this.props.dispatch(authenticateUser(authentication.username, authentication.password));
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
@@ -38,7 +39,6 @@ class AuthPage extends React.Component {
         } = this.props;
 
         if(authentication.token){
-            debugger;
             let redirectUrl = match.url ==  '/login' ? "/" : router.location.pathname;
             return <Redirect
                 to={{

@@ -5,6 +5,8 @@ import SearchInput from 'components/SearchInput';
 import { notificationsData } from 'demos/header';
 import withBadge from 'hocs/withBadge';
 import React from 'react';
+import {Redirect} from "react-router-dom";
+import {connect} from 'react-redux';
 import {
   MdClearAll,
   MdExitToApp,
@@ -29,6 +31,7 @@ import {
   PopoverBody,
 } from 'reactstrap';
 import bn from 'utils/bemnames';
+import { signoutFromWeb } from './../../utils/jwtTokenUtils';
 
 const bem = bn.create('header');
 
@@ -75,9 +78,17 @@ class Header extends React.Component {
     document.querySelector('.cr-sidebar').classList.toggle('cr-sidebar--open');
   };
 
+  handleSignout = () => {
+    signoutFromWeb();
+    return <Redirect
+        to={{
+          pathname: '/login'
+        }}
+    />
+  }
+
   render() {
     const { isNotificationConfirmed } = this.state;
-
     return (
       <Navbar light expand className={bem.b('bg-white')}>
         <Nav navbar className="mr-2">
@@ -156,7 +167,7 @@ class Header extends React.Component {
                     <ListGroupItem tag="button" action className="border-light">
                       <MdHelp /> Help
                     </ListGroupItem>
-                    <ListGroupItem tag="button" action className="border-light">
+                    <ListGroupItem tag="button" action className="border-light" onClick={this.handleSignout}>
                       <MdExitToApp /> Signout
                     </ListGroupItem>
                   </ListGroup>
@@ -170,4 +181,10 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+function mapStateToProps(store){
+  return {
+    router: store.router
+  }
+}
+
+export default connect(mapStateToProps)(Header);

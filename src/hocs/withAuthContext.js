@@ -1,9 +1,10 @@
 import React from 'react';
-import Cookies from 'js-cookie'
-import { GLOBAL_CONSTANT } from './../utils/constants'
 import { Redirect } from "react-router-dom";
 import {connect} from 'react-redux';
 import {compose} from 'redux';
+import {isValidToken} from './../utils/jwtTokenUtils'
+import {fetchMetaData} from "../actions/metaDataActions";
+import metaData from "../reducers/metaData";
 
 
 const AuthModalPage = React.lazy(() => import('./../pages/AuthModalPage'));
@@ -16,15 +17,16 @@ const withAuthContext = (WrappedComponent) => {
         }
 
         componentWillMount() {
-             const cookie = Cookies.get(GLOBAL_CONSTANT.Cookie);
-             if(cookie){
+             if(isValidToken()){
+                 if(!this.props.metaData.metadataLoaded){
+                     this.props.dispatch(fetchMetaData());
+                 }
                  this.setState({...this.state, isAuthenticated: true})
              }
         }
 
 
         render() {
-            debugger;
             return (
                 this.state.isAuthenticated ? <WrappedComponent
                     {...this.props}
@@ -43,7 +45,7 @@ const withAuthContext = (WrappedComponent) => {
 
 function mapStateToProps(store){
     return {
-
+        metaData: store.metaData
     }
 }
 

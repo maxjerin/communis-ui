@@ -10,7 +10,7 @@ const store = configureStore();
 
 render(
     <Provider store={store} history={history}>
-        <App />
+        <App store={store} />
     </Provider>,
     document.getElementById('root')
 );

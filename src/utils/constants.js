@@ -2,8 +2,13 @@ const DOMAIN = "http://localhost:8080";
 
 export const GLOBAL_CONSTANT = {
   Cookie: "commjwt",
+  AUTH_HEADER: "X-Auth-Token",
   ENDPOINTS: {
-    AUTH: DOMAIN + "/auth"
+    AUTH: DOMAIN + "/auth",
+    COUNTRIES: DOMAIN + "/api/core/countries",
+    MISSION_REGION: DOMAIN + "/api/mission/region",
+    MISSION_SUB_REGION: DOMAIN + "/api/mission/region/$regionId/subRegion",
+    MISSION_REGION_TIERS: DOMAIN + "/api/mission/region/tiers"
   }
 }
 
