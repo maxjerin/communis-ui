@@ -43,7 +43,7 @@ const WidgetPage = () => {
                 {...restProps}
               />
             </Col>
-          )
+          ),
         )}
       </Row>
     </Page>

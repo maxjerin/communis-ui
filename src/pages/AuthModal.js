@@ -31,7 +31,8 @@ class AuthModal extends React.Component {
           toggle={this.toggle}
           size="sm"
           fade={false}
-          centered>
+          centered
+        >
           <ModalBody>
             <AuthForm
               authState={this.state.authState}

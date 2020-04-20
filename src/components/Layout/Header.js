@@ -5,8 +5,8 @@ import SearchInput from 'components/SearchInput';
 import { notificationsData } from 'demos/header';
 import withBadge from 'hocs/withBadge';
 import React from 'react';
-import {Redirect} from "react-router-dom";
-import {connect} from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import {
   MdClearAll,
   MdExitToApp,
@@ -80,12 +80,14 @@ class Header extends React.Component {
 
   handleSignout = () => {
     signoutFromWeb();
-    return <Redirect
+    return (
+      <Redirect
         to={{
-          pathname: '/login'
+          pathname: '/login',
         }}
-    />
-  }
+      />
+    );
+  };
 
   render() {
     const { isNotificationConfirmed } = this.state;
@@ -167,7 +169,12 @@ class Header extends React.Component {
                     <ListGroupItem tag="button" action className="border-light">
                       <MdHelp /> Help
                     </ListGroupItem>
-                    <ListGroupItem tag="button" action className="border-light" onClick={this.handleSignout}>
+                    <ListGroupItem
+                      tag="button"
+                      action
+                      className="border-light"
+                      onClick={this.handleSignout}
+                    >
                       <MdExitToApp /> Signout
                     </ListGroupItem>
                   </ListGroup>
@@ -181,10 +188,10 @@ class Header extends React.Component {
   }
 }
 
-function mapStateToProps(store){
+function mapStateToProps(store) {
   return {
-    router: store.router
-  }
+    router: store.router,
+  };
 }
 
 export default connect(mapStateToProps)(Header);

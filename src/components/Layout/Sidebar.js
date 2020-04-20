@@ -44,14 +44,18 @@ const sidebarBackground = {
 };
 
 const missionItems = [
-  { to: '/mission-regions', name: 'Regions', exact: false, Icon: MdRadioButtonChecked }
+  {
+    to: '/mission-regions',
+    name: 'Regions',
+    exact: false,
+    Icon: MdRadioButtonChecked,
+  },
 ];
 
 const navContents = [
   { to: '/typography', name: 'typography', exact: false, Icon: MdTextFields },
   { to: '/tables', name: 'tables', exact: false, Icon: MdBorderAll },
 ];
-
 
 const bem = bn.create('sidebar');
 
@@ -86,9 +90,7 @@ class Sidebar extends React.Component {
                 className="pr-2"
                 alt=""
               />
-              <span className="text-white">
-                Communis
-              </span>
+              <span className="text-white">Communis</span>
             </SourceLink>
           </Navbar>
           <Nav vertical>
