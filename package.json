@@ -33,10 +33,13 @@
     "victory": "^32.0.0"
   },
   "devDependencies": {
-    "react-hot-loader": "^4.12.18",
-    "history": "4.10.1",
     "gh-pages": "^1.2.0",
+    "history": "4.10.1",
+    "husky": "^4.2.5",
     "node-sass": "^4.11.0",
+    "prettier": "^2.0.4",
+    "pretty-quick": "^2.0.1",
+    "react-hot-loader": "^4.12.18",
     "react-scripts": "2.1.8",
     "serve": "^10.1.2",
     "stylelint": "^9.3.0",
@@ -51,7 +54,13 @@
     "serve": "serve -s build",
     "deploy": "gh-pages -d build",
     "test": "react-scripts test --env=jsdom",
+    "prettier": "prettier --write ./src/**",
     "eject": "react-scripts eject"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick"
+    }
   },
   "browserslist": [
     ">0.2%",
