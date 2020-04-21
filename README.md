@@ -5,3 +5,4 @@
 - Install dependencies and run project
   - `yarn install`
   - `yarn start`
+- Update `REACT_APP_DEV_USER`and `REACT_APP_DEV_PASSWORD` with username and password for development.
