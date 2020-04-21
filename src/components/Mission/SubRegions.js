@@ -32,7 +32,6 @@ class SubRegions extends CommunisComponent {
   };
 
   handleSubmit = form => {
-    debugger;
     form.state = this.props.region.state;
     form.country = this.props.region.country;
     //this.props.dispatch(createRegion(form));
@@ -51,7 +50,6 @@ class SubRegions extends CommunisComponent {
   };
 
   render() {
-    debugger;
     return (
       <Card>
         <CardHeader>

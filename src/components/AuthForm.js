@@ -32,7 +32,6 @@ class AuthForm extends CommunisComponent {
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
-    debugger;
     if (nextProps.authentication) {
       switch (nextProps.authentication.responseCode) {
         case 200:

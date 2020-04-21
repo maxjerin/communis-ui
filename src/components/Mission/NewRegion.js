@@ -22,7 +22,6 @@ export default class EditMissionRegion extends CommunisComponent {
     },
   };
   render() {
-    debugger;
     let countries = this.props.metaData.countries.map(country => (
       <option key={country.code} value={country.code}>
         {country.name}
