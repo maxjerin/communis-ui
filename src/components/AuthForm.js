@@ -22,8 +22,8 @@ class AuthForm extends CommunisComponent {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       form: {
-        username: null,
-        password: null,
+        username: process.env.REACT_APP_DEV_USER,
+        password: process.env.REACT_APP_DEV_PASSWORD,
       },
       showAlert: false,
       alertColor: 'danger',
