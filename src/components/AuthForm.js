@@ -217,12 +217,14 @@ AuthForm.defaultProps = {
     id: 'username',
     type: 'email',
     placeholder: 'your@email.com',
+    value: process.env.REACT_APP_DEV_USER,
   },
   passwordLabel: 'Password',
   passwordInputProps: {
     id: 'password',
     type: 'password',
     placeholder: 'your password',
+    value: process.env.REACT_APP_DEV_PASSWORD,
   },
   confirmPasswordLabel: 'Confirm Password',
   confirmPasswordInputProps: {

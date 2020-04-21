@@ -20,8 +20,9 @@ class AuthPage extends React.Component {
   };
 
   handleLoginSubmit = authentication => {
-    this.props.dispatch(authenticateUser('admin@communis.com', 'A@12word'));
-    //this.props.dispatch(authenticateUser(authentication.username, authentication.password));
+    this.props.dispatch(
+      authenticateUser(authentication.username, authentication.password),
+    );
   };
 
   componentWillReceiveProps(nextProps, nextContext) {
