@@ -37,7 +37,7 @@ class AuthPage extends React.Component {
     const { authentication, router, match } = this.props;
 
     if (authentication.token) {
-      let redirectUrl = match.url == '/login' ? '/' : router.location.pathname;
+      let redirectUrl = match.url === '/login' ? '/' : router.location.pathname;
       return (
         <Redirect
           to={{
