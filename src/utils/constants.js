@@ -1,18 +1,16 @@
-const DOMAIN = "http://localhost:8080";
+const DOMAIN = 'http://localhost:8080';
 
 export const GLOBAL_CONSTANT = {
-  Cookie: "commjwt",
-  AUTH_HEADER: "X-Auth-Token",
+  Cookie: 'commjwt',
+  AUTH_HEADER: 'X-Auth-Token',
   ENDPOINTS: {
-    AUTH: DOMAIN + "/auth",
-    COUNTRIES: DOMAIN + "/api/core/countries",
-    MISSION_REGION: DOMAIN + "/api/mission/region",
-    MISSION_SUB_REGION: DOMAIN + "/api/mission/region/$regionId/subRegion",
-    MISSION_REGION_TIERS: DOMAIN + "/api/mission/region/tiers"
-  }
-}
-
-
+    AUTH: DOMAIN + '/auth',
+    COUNTRIES: DOMAIN + '/api/core/countries',
+    MISSION_REGION: DOMAIN + '/api/mission/region',
+    MISSION_SUB_REGION: DOMAIN + '/api/mission/region/$regionId/subRegion',
+    MISSION_REGION_TIERS: DOMAIN + '/api/mission/region/tiers',
+  },
+};
 
 export const NOTIFICATION_SYSTEM_STYLE = {
   NotificationItem: {

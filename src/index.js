@@ -2,17 +2,17 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
 import configureStore, { history } from './store/createStore';
 import App from './App';
 const store = configureStore();
 
 render(
-    <Provider store={store} history={history}>
-        <App store={store} />
-    </Provider>,
-    document.getElementById('root')
+  <Provider store={store} history={history}>
+    <App store={store} />
+  </Provider>,
+  document.getElementById('root'),
 );
 
 /*

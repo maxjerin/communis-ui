@@ -4,11 +4,12 @@ import authentication from './authentication';
 import mission from './mission';
 import metaData from './metaData';
 
-const rootReducer = history => combineReducers({
+const rootReducer = history =>
+  combineReducers({
     router: connectRouter(history),
     metaData,
     authentication,
-    mission
-});
+    mission,
+  });
 
 export default rootReducer;

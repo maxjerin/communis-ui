@@ -157,17 +157,11 @@ export const chartJsGradient = {
       let gradient = ctx.createLinearGradient(0, 0, 0, 240);
       gradient.addColorStop(
         0,
-        ChartJS.helpers
-          .color('#00c5dc')
-          .alpha(0.7)
-          .rgbString()
+        ChartJS.helpers.color('#00c5dc').alpha(0.7).rgbString(),
       );
       gradient.addColorStop(
         1,
-        ChartJS.helpers
-          .color('#f2feff')
-          .alpha(0)
-          .rgbString()
+        ChartJS.helpers.color('#f2feff').alpha(0).rgbString(),
       );
 
       return {

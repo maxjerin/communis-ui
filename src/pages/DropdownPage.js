@@ -29,7 +29,8 @@ const DropdownPage = () => {
                   <DropdownToggle
                     caret
                     color={color}
-                    className="text-capitalize m-1">
+                    className="text-capitalize m-1"
+                  >
                     {color}
                   </DropdownToggle>
                   <DropdownMenu>
@@ -52,7 +53,8 @@ const DropdownPage = () => {
               {colors.map((color, index) => (
                 <UncontrolledButtonDropdown
                   key={index}
-                  className="text-capitalize m-1">
+                  className="text-capitalize m-1"
+                >
                   <Button color={color}>{color}</Button>
                   <DropdownToggle caret color={color} />
                   <DropdownMenu>

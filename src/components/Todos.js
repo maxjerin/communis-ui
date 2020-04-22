@@ -16,7 +16,7 @@ export const propTypes = {
       id: PropTypes.ID,
       title: PropTypes.string,
       done: PropTypes.bool,
-    })
+    }),
   ),
 };
 
