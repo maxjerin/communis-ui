@@ -9,7 +9,6 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './styles/reduction.scss';
 import withAuthContext from './hocs/withAuthContext';
 
-
 const AlertPage = React.lazy(() => import('pages/AlertPage'));
 const AuthModalPage = React.lazy(() => import('pages/AuthModalPage'));
 const BadgePage = React.lazy(() => import('pages/BadgePage'));
@@ -26,7 +25,9 @@ const ProgressPage = React.lazy(() => import('pages/ProgressPage'));
 const TablePage = React.lazy(() => import('pages/TablePage'));
 const TypographyPage = React.lazy(() => import('pages/TypographyPage'));
 const WidgetPage = React.lazy(() => import('pages/WidgetPage'));
-const MissionRegionList = React.lazy(() => import('pages/mission/MissionRegionList'));
+const MissionRegionList = React.lazy(() =>
+  import('pages/mission/MissionRegionList'),
+);
 const MissionRegion = React.lazy(() => import('pages/mission/MissionRegion'));
 
 const getBasename = () => {
@@ -34,7 +35,6 @@ const getBasename = () => {
 };
 
 class App extends React.Component {
-
   render() {
     return (
       <BrowserRouter basename={getBasename()}>
@@ -59,10 +59,18 @@ class App extends React.Component {
 
             <MainLayout breakpoint={this.props.breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
-                <Route exact path="/" component={withAuthContext(DashboardPage)} />
+                <Route
+                  exact
+                  path="/"
+                  component={withAuthContext(DashboardPage)}
+                />
                 <Route exact path="/login-modal" component={AuthModalPage} />
                 <Route exact path="/buttons" component={ButtonPage} />
-                <Route exact path="/cards" component={withAuthContext(CardPage)} />
+                <Route
+                  exact
+                  path="/cards"
+                  component={withAuthContext(CardPage)}
+                />
                 <Route exact path="/widgets" component={WidgetPage} />
                 <Route exact path="/typography" component={TypographyPage} />
                 <Route exact path="/alerts" component={AlertPage} />
@@ -79,8 +87,16 @@ class App extends React.Component {
                 <Route exact path="/forms" component={FormPage} />
                 <Route exact path="/input-groups" component={InputGroupPage} />
                 <Route exact path="/charts" component={ChartPage} />
-                <Route exact path="/mission-regions" component={withAuthContext(MissionRegionList)} />
-                <Route exact path="/mission-region" component={withAuthContext(MissionRegion)} />
+                <Route
+                  exact
+                  path="/mission-regions"
+                  component={withAuthContext(MissionRegionList)}
+                />
+                <Route
+                  exact
+                  path="/mission-region"
+                  component={withAuthContext(MissionRegion)}
+                />
               </React.Suspense>
             </MainLayout>
             <Redirect to="/" />

@@ -12,9 +12,7 @@ import {
 } from 'react-simple-maps';
 import { getColor } from 'utils/colors';
 
-const cityScale = scaleLinear()
-  .domain([0, 37843000])
-  .range([1, 25]);
+const cityScale = scaleLinear().domain([0, 37843000]).range([1, 25]);
 
 class BubbleMap extends Component {
   state = {

@@ -12,12 +12,12 @@
 // $cyan: #00bcd4;
 // $white: #fff;
 $theme-colors: (
-  "primary": #14548c,
-  "secondary": #d96704,
-  "success": #038c73,
-  "danger": #f85032,
-  "warning": #ffd700,
-  "info": #6992bc
+  'primary': #14548c,
+  'secondary': #d96704,
+  'success': #038c73,
+  'danger': #f85032,
+  'warning': #ffd700,
+  'info': #6992bc,
 );
 
 $enable-gradients: true;
@@ -25,7 +25,6 @@ $enable-gradients: true;
 // card
 //
 $card-cap-bg: #fff;
-
 
 // sidebar
 $cr-sidebar-width: 224px;

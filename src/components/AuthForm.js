@@ -1,35 +1,65 @@
 import logo200Image from 'assets/img/logo/logo_200.png';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {Alert, Button, Card, CardBody, Form, FormGroup, Input, Label, UncontrolledAlert,ListGroup, ListGroupItem} from 'reactstrap';
-import CommunisComponent from "./CommunisComponent";
-
-
+import {
+  Alert,
+  Button,
+  Card,
+  CardBody,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  UncontrolledAlert,
+  ListGroup,
+  ListGroupItem,
+} from 'reactstrap';
+import CommunisComponent from './CommunisComponent';
 
 class AuthForm extends CommunisComponent {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-   this.state = {
-     form : {
-       username: null,
-       password: null
-     },
-     showAlert: false,
-     alertColor: "danger",
-     alertMessage: []
-   }
+    this.state = {
+      form: {
+        username: process.env.REACT_APP_DEV_USER,
+        password: process.env.REACT_APP_DEV_PASSWORD,
+      },
+      showAlert: false,
+      alertColor: 'danger',
+      alertMessage: [],
+    };
   }
 
-
   componentWillReceiveProps(nextProps, nextContext) {
-    debugger;
-    if(nextProps.authentication){
-      switch(nextProps.authentication.responseCode){
-        case 200: break;
-        case 400: this.setState({...this.state, showAlert: true, alertColor: "warning", alertMessage:  nextProps.authentication.exception});break;
-        case 401: this.setState({...this.state, showAlert: true, alertColor: "danger", alertMessage:  nextProps.authentication.exception}); break;
-        case 403: this.setState({...this.state, showAlert: true, alertColor: "danger", alertMessage:  nextProps.authentication.exception}); break;
+    if (nextProps.authentication) {
+      switch (nextProps.authentication.responseCode) {
+        case 200:
+          break;
+        case 400:
+          this.setState({
+            ...this.state,
+            showAlert: true,
+            alertColor: 'warning',
+            alertMessage: nextProps.authentication.exception,
+          });
+          break;
+        case 401:
+          this.setState({
+            ...this.state,
+            showAlert: true,
+            alertColor: 'danger',
+            alertMessage: nextProps.authentication.exception,
+          });
+          break;
+        case 403:
+          this.setState({
+            ...this.state,
+            showAlert: true,
+            alertColor: 'danger',
+            alertMessage: nextProps.authentication.exception,
+          });
+          break;
         default: //do nothing
       }
     }
@@ -50,8 +80,7 @@ class AuthForm extends CommunisComponent {
 
   handleSubmit() {
     this.props.handleLoginSubmit(this.state.form);
-
-  };
+  }
 
   renderButtonText() {
     const { buttonText } = this.props;
@@ -67,7 +96,7 @@ class AuthForm extends CommunisComponent {
     return buttonText;
   }
 
-  onDismiss = () => this.setState({...this.state, showAlert: false})
+  onDismiss = () => this.setState({ ...this.state, showAlert: false });
 
   render() {
     const {
@@ -97,11 +126,17 @@ class AuthForm extends CommunisComponent {
         )}
         <FormGroup>
           <Label for={usernameLabel}>{usernameLabel}</Label>
-          <Input {...usernameInputProps} onChange={e => this.updateFormState('username',e)}/>
+          <Input
+            {...usernameInputProps}
+            onChange={e => this.updateFormState('username', e)}
+          />
         </FormGroup>
         <FormGroup>
           <Label for={passwordLabel}>{passwordLabel}</Label>
-          <Input {...passwordInputProps} onChange={e => this.updateFormState('password',e)} />
+          <Input
+            {...passwordInputProps}
+            onChange={e => this.updateFormState('password', e)}
+          />
         </FormGroup>
         {this.isSignup && (
           <FormGroup>
@@ -116,19 +151,25 @@ class AuthForm extends CommunisComponent {
           </Label>
         </FormGroup>
         <hr />
-        {
-          this.state.showAlert ? <UncontrolledAlert color={this.state.alertColor} toggle={this.onDismiss}>
+        {this.state.showAlert ? (
+          <UncontrolledAlert
+            color={this.state.alertColor}
+            toggle={this.onDismiss}
+          >
             <ListGroup flush>
-              {this.state.alertMessage.map(msg =>  <ListGroupItem>{msg}</ListGroupItem>)}
+              {this.state.alertMessage.map(msg => (
+                <ListGroupItem>{msg}</ListGroupItem>
+              ))}
             </ListGroup>
-          </UncontrolledAlert> : null
-        }
+          </UncontrolledAlert>
+        ) : null}
 
         <Button
           size="lg"
           className="bg-gradient-theme-left border-0"
           block
-          onClick={this.handleSubmit}>
+          onClick={this.handleSubmit}
+        >
           {this.renderButtonText()}
         </Button>
 
@@ -176,12 +217,14 @@ AuthForm.defaultProps = {
     id: 'username',
     type: 'email',
     placeholder: 'your@email.com',
+    value: process.env.REACT_APP_DEV_USER,
   },
   passwordLabel: 'Password',
   passwordInputProps: {
-    id:'password',
+    id: 'password',
     type: 'password',
     placeholder: 'your password',
+    value: process.env.REACT_APP_DEV_PASSWORD,
   },
   confirmPasswordLabel: 'Confirm Password',
   confirmPasswordInputProps: {

@@ -21,7 +21,6 @@ class MissionRegion extends React.Component {
   }
 
   render() {
-    debugger;
     const { region } = this.props.location.state;
 
     const { metaData, mission } = this.props;

@@ -6,17 +6,11 @@ export const getStackLineChart = ({ labels, data }) => canvas => {
   let gradient = ctx.createLinearGradient(0, 0, 0, 240);
   gradient.addColorStop(
     0,
-    ChartJS.helpers
-      .color('#00c9ff')
-      .alpha(1)
-      .rgbString()
+    ChartJS.helpers.color('#00c9ff').alpha(1).rgbString(),
   );
   gradient.addColorStop(
     1,
-    ChartJS.helpers
-      .color('#00c9ff')
-      .alpha(0.2)
-      .rgbString()
+    ChartJS.helpers.color('#00c9ff').alpha(0.2).rgbString(),
   );
 
   return {
