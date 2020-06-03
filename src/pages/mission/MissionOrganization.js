@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchSubRegions } from './../../actions/missionActions';
+import {
+  fetchOrganizations,
+  fetchSubRegions,
+} from './../../actions/missionActions';
 import {
   Row,
   Col,
@@ -15,10 +18,10 @@ import {
 import { FaGlobeAsia } from 'react-icons/fa';
 import SubRegions from './../../components/Mission/SubRegions';
 
-class MissionRegion extends React.Component {
+class MissionOrganization extends React.Component {
   componentWillMount() {
     const { region } = this.props.location.state;
-    this.props.dispatch(fetchSubRegions(region.id));
+    this.props.dispatch(fetchOrganizations());
   }
 
   render() {
@@ -69,4 +72,4 @@ function mapStateToProps(store) {
   };
 }
 
-export default connect(mapStateToProps)(MissionRegion);
+export default connect(mapStateToProps)(MissionOrganization);

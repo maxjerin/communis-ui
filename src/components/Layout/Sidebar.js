@@ -50,6 +50,12 @@ const missionItems = [
     exact: false,
     Icon: MdRadioButtonChecked,
   },
+  {
+    to: '/mission-organizations',
+    name: 'Organizations',
+    exact: false,
+    Icon: MdRadioButtonChecked,
+  },
 ];
 
 const navContents = [

@@ -28,6 +28,86 @@ export function fetchRegionTiers() {
   };
 }
 
+export function fetchOrganizations() {
+  return function (dispatch) {
+    axios({
+      method: 'get',
+      url: GLOBAL_CONSTANT.ENDPOINTS.MISSION_ORGANIZATION,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-Auth-Token': getLocalToken(),
+      },
+    })
+      .then(response => {
+        dispatch({
+          type: 'FETCH_ORGANIZATION_FULFILLED',
+          payload: response.data.data,
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: 'FETCH_ORGANIZATION_REJECTED',
+          payload: err.response.data,
+        });
+      });
+  };
+}
+
+export function createOrganization(organization) {
+  return function (dispatch) {
+    axios({
+      method: 'put',
+      url: GLOBAL_CONSTANT.ENDPOINTS.MISSION_ORGANIZATION,
+      data: organization,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-Auth-Token': getLocalToken(),
+      },
+    })
+      .then(response => {
+        dispatch({
+          type: 'CREATE_ORGANIZATION_FULFILLED',
+          payload: response.data.data,
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: 'CREATE_ORGANIZATION_REJECTED',
+          payload: err.response.data,
+        });
+      });
+  };
+}
+
+export function updateOrganization(organization) {
+  return function (dispatch) {
+    axios({
+      method: 'post',
+      url: GLOBAL_CONSTANT.ENDPOINTS.MISSION_ORGANIZATION,
+      data: organization,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-Auth-Token': getLocalToken(),
+      },
+    })
+      .then(response => {
+        dispatch({
+          type: 'UPDATE_ORGANIZATION_FULFILLED',
+          payload: response.data.data,
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: 'UPDATE_ORGANIZATION_REJECTED',
+          payload: err.response.data,
+        });
+      });
+  };
+}
+
 export function fetchRegions() {
   return function (dispatch) {
     axios({

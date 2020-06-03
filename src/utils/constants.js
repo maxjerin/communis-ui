@@ -7,6 +7,7 @@ export const GLOBAL_CONSTANT = {
     AUTH: DOMAIN + '/auth',
     COUNTRIES: DOMAIN + '/api/core/countries',
     MISSION_REGION: DOMAIN + '/api/mission/region',
+    MISSION_ORGANIZATION: DOMAIN + '/api/mission/organization',
     MISSION_SUB_REGION: DOMAIN + '/api/mission/region/$regionId/subRegion',
     MISSION_REGION_TIERS: DOMAIN + '/api/mission/region/tiers',
   },
