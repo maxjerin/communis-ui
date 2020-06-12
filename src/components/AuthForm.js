@@ -110,6 +110,7 @@ class AuthForm extends CommunisComponent {
       children,
       onLogoClick,
     } = this.props;
+    const { username, password } = this.state.form;
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -128,6 +129,7 @@ class AuthForm extends CommunisComponent {
           <Label for={usernameLabel}>{usernameLabel}</Label>
           <Input
             {...usernameInputProps}
+            value={username}
             onChange={e => this.updateFormState('username', e)}
           />
         </FormGroup>
@@ -135,6 +137,7 @@ class AuthForm extends CommunisComponent {
           <Label for={passwordLabel}>{passwordLabel}</Label>
           <Input
             {...passwordInputProps}
+            value={password}
             onChange={e => this.updateFormState('password', e)}
           />
         </FormGroup>
@@ -217,14 +220,12 @@ AuthForm.defaultProps = {
     id: 'username',
     type: 'email',
     placeholder: 'your@email.com',
-    value: process.env.REACT_APP_DEV_USER,
   },
   passwordLabel: 'Password',
   passwordInputProps: {
     id: 'password',
     type: 'password',
     placeholder: 'your password',
-    value: process.env.REACT_APP_DEV_PASSWORD,
   },
   confirmPasswordLabel: 'Confirm Password',
   confirmPasswordInputProps: {
