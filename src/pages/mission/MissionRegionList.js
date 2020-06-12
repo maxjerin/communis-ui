@@ -4,6 +4,7 @@ import {
   fetchRegions,
   createRegion,
   fetchRegionTiers,
+  fetchOrganizations,
 } from './../../actions/missionActions';
 import {
   Button,
@@ -47,14 +48,20 @@ class MissionRegionList extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchRegions());
     this.props.dispatch(fetchRegionTiers());
+    const { organizations, regions } = this.props.mission;
+    if (regions && regions.length == 0) {
+      this.props.dispatch(fetchRegions());
+    }
+    if (organizations && organizations.length == 0) {
+      this.props.dispatch(fetchOrganizations());
+    }
   }
 
   handleSubmit = form => {
     this.props.dispatch(createRegion(form));
   };
-
+  '';
   toggle = modalType => () => {
     if (!modalType) {
       return this.setState({
@@ -93,6 +100,7 @@ class MissionRegionList extends React.Component {
               className={this.props.className}
               metaData={this.props.metaData}
               mission={this.props.mission}
+              error={this.props.error}
               handleSubmit={this.handleSubmit}
             ></EditMissionRegion>
 
@@ -117,10 +125,12 @@ class MissionRegionList extends React.Component {
 }
 
 function mapStateToProps(store) {
+  debugger;
   return {
     mission: store.mission,
     router: store.router,
     metaData: store.metaData,
+    error: store.error,
   };
 }
 

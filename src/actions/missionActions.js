@@ -21,7 +21,7 @@ export function fetchRegionTiers() {
       })
       .catch(err => {
         dispatch({
-          type: 'FETCH_REGIONS_TIERS_REJECTED',
+          type: 'HTTP_ERROR',
           payload: err.response.data,
         });
       });
@@ -47,7 +47,7 @@ export function fetchOrganizations() {
       })
       .catch(err => {
         dispatch({
-          type: 'FETCH_ORGANIZATION_REJECTED',
+          type: 'HTTP_ERROR',
           payload: err.response.data,
         });
       });
@@ -74,7 +74,7 @@ export function createOrganization(organization) {
       })
       .catch(err => {
         dispatch({
-          type: 'CREATE_ORGANIZATION_REJECTED',
+          type: 'HTTP_ERROR',
           payload: err.response.data,
         });
       });
@@ -101,7 +101,7 @@ export function updateOrganization(organization) {
       })
       .catch(err => {
         dispatch({
-          type: 'UPDATE_ORGANIZATION_REJECTED',
+          type: 'HTTP_ERROR',
           payload: err.response.data,
         });
       });
@@ -127,7 +127,7 @@ export function fetchRegions() {
       })
       .catch(err => {
         dispatch({
-          type: 'FETCH_REGIONS_REJECTED',
+          type: 'HTTP_ERROR',
           payload: err.response.data,
         });
       });
@@ -157,7 +157,7 @@ export function fetchSubRegions(regionId) {
       })
       .catch(err => {
         dispatch({
-          type: 'FETCH_SUB_REGIONS_REJECTED',
+          type: 'HTTP_ERROR',
           payload: err.response.data,
         });
       });
@@ -183,8 +183,9 @@ export function createRegion(region) {
         });
       })
       .catch(err => {
+        debugger;
         dispatch({
-          type: 'CREATE_REGIONS_REJECTED',
+          type: 'HTTP_ERROR',
           payload: err.response.data,
         });
       });

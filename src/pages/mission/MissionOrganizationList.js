@@ -53,7 +53,10 @@ class MissionOrganizationList extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchOrganizations());
+    const { organizations } = this.props.mission;
+    if (organizations && organizations.length == 0) {
+      this.props.dispatch(fetchOrganizations());
+    }
   }
 
   handleSubmit = form => {

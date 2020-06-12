@@ -12,19 +12,29 @@ import {
   ModalFooter,
   ModalHeader,
 } from 'reactstrap';
+import SaveOrUpdateAddress from '../Address/SaveOrUpdateAddress';
 
 export default class EditMissionRegion extends CommunisComponent {
   state = {
     form: {
-      missionRegionName: null,
-      state: null,
-      country: null,
+      name: null,
+      address: null,
     },
   };
+
+  handleAddressUpdate = address => {
+    if (address) {
+      let form = this.state.form;
+      form['address'] = address;
+      this.setState({ form });
+      console.log(this.state);
+    }
+  };
+
   render() {
-    let countries = this.props.metaData.countries.map(country => (
-      <option key={country.code} value={country.code}>
-        {country.name}
+    let organizations = this.props.mission.organizations.map(organization => (
+      <option key={organization.id} value={organization.id}>
+        {organization.name}
       </option>
     ));
     let tiers = this.props.mission.tiers.map(tier => (
@@ -42,7 +52,23 @@ export default class EditMissionRegion extends CommunisComponent {
           Create New Region
         </ModalHeader>
         <ModalBody>
+          {this.handleException()}
           <Form>
+            <FormGroup row>
+              <Label for="tier" sm={2}>
+                Organization
+              </Label>
+              <Col sm={10}>
+                <Input
+                  type="select"
+                  name="organization"
+                  id="organization"
+                  onChange={e => this.updateFormState('organization', e)}
+                >
+                  {organizations}
+                </Input>
+              </Col>
+            </FormGroup>
             <FormGroup row>
               <Label for="missionRegionName" sm={2}>
                 Region Name
@@ -50,40 +76,11 @@ export default class EditMissionRegion extends CommunisComponent {
               <Col sm={10}>
                 <Input
                   type="text"
-                  name="missionRegionName"
-                  id="missionRegionName"
+                  name="name"
+                  id="name"
                   placeholder="Enter Region/Mission Station Name"
-                  onChange={e => this.updateFormState('missionRegionName', e)}
+                  onChange={e => this.updateFormState('name', e)}
                 />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="state" sm={2}>
-                State
-              </Label>
-              <Col sm={10}>
-                <Input
-                  type="text"
-                  name="state"
-                  id="state"
-                  placeholder="State"
-                  onChange={e => this.updateFormState('state', e)}
-                />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="country" sm={2}>
-                Country
-              </Label>
-              <Col sm={10}>
-                <Input
-                  type="select"
-                  name="country"
-                  id="country"
-                  onChange={e => this.updateFormState('country', e)}
-                >
-                  {countries}
-                </Input>
               </Col>
             </FormGroup>
             <FormGroup row>
@@ -99,6 +96,15 @@ export default class EditMissionRegion extends CommunisComponent {
                 >
                   {tiers}
                 </Input>
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Col>
+                <SaveOrUpdateAddress
+                  countries={this.props.metaData.countries}
+                  onUpdateCallback={this.handleAddressUpdate}
+                  address={this.state.form.address}
+                />
               </Col>
             </FormGroup>
           </Form>

@@ -54,7 +54,7 @@ class SaveOrUpdateAddress extends CommunisComponent {
 
   render() {
     return (
-      <Form>
+      <div>
         <FormGroup row>
           <Label for="street" sm={2}>
             Street Address
@@ -146,7 +146,7 @@ class SaveOrUpdateAddress extends CommunisComponent {
             />
           </Col>
         </FormGroup>
-      </Form>
+      </div>
     );
   }
 }

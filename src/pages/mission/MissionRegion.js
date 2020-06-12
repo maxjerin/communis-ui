@@ -37,7 +37,8 @@ class MissionRegion extends React.Component {
             <Row>
               <Col md={12}>
                 <h3>
-                  <FaGlobeAsia /> {region.missionRegionName} | {region.state}{' '}
+                  <FaGlobeAsia /> {region.missionRegnameionName} |{' '}
+                  {region.state}{' '}
                 </h3>
               </Col>
             </Row>
