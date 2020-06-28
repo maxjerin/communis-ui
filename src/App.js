@@ -29,6 +29,8 @@ const MissionRegionList = React.lazy(() =>
   import('pages/mission/MissionRegionList'),
 );
 const MissionRegion = React.lazy(() => import('pages/mission/MissionRegion'));
+const WorkerList = React.lazy(() => import('pages/worker/WorkersList'));
+const AddWorkerWorkflow = React.lazy(() => import('pages/worker/AddWorker'));
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -62,52 +64,49 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/"
-                  component={() => withAuthContext(DashboardPage)}
+                  component={withAuthContext(DashboardPage)}
                 />
-                <Route
-                  exact
-                  path="/login-modal"
-                  component={() => AuthModalPage}
-                />
+                <Route exact path="/login-modal" component={AuthModalPage} />
                 <Route exact path="/buttons" component={() => ButtonPage} />
                 <Route
                   exact
                   path="/cards"
-                  component={() => withAuthContext(CardPage)}
+                  component={withAuthContext(CardPage)}
                 />
                 <Route exact path="/widgets" component={() => WidgetPage} />
-                <Route
-                  exact
-                  path="/typography"
-                  component={() => TypographyPage}
-                />
+                <Route exact path="/typography" component={TypographyPage} />
                 <Route exact path="/alerts" component={() => AlertPage} />
                 <Route exact path="/tables" component={() => TablePage} />
                 <Route exact path="/badges" component={() => BadgePage} />
                 <Route
                   exact
                   path="/button-groups"
-                  component={() => ButtonGroupPage}
+                  component={ButtonGroupPage}
                 />
                 <Route exact path="/dropdowns" component={() => DropdownPage} />
                 <Route exact path="/progress" component={() => ProgressPage} />
                 <Route exact path="/modals" component={() => ModalPage} />
                 <Route exact path="/forms" component={() => FormPage} />
-                <Route
-                  exact
-                  path="/input-groups"
-                  component={() => InputGroupPage}
-                />
+                <Route exact path="/input-groups" component={InputGroupPage} />
                 <Route exact path="/charts" component={() => ChartPage} />
                 <Route
                   exact
                   path="/mission-regions"
-                  component={() => withAuthContext(MissionRegionList)}
+                  component={withAuthContext(MissionRegionList)}
                 />
                 <Route
                   exact
                   path="/mission-region"
-                  component={() => withAuthContext(MissionRegion)}
+                  component={withAuthContext(MissionRegion)}
+                />
+                <Route
+                  exact
+                  path="/workers"
+                  component={withAuthContext(WorkerList)}
+                />
+                <Route
+                  path="/add-worker"
+                  component={withAuthContext(AddWorkerWorkflow)}
                 />
               </React.Suspense>
             </MainLayout>
