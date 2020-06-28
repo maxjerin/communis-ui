@@ -55,3 +55,31 @@ export function resetWorkerWorkflow() {
     type: 'RESET_WORKER_WORKFLOW',
   };
 }
+
+export function addPersonalDetails(personalDetails) {
+  return {
+    type: 'ADD_PERSONAL_DETAILS',
+    payload: personalDetails,
+  };
+}
+
+export function addAddress(address) {
+  return {
+    type: 'ADD_ADDRESS',
+    payload: address,
+  };
+}
+
+export function addFamily(family) {
+  return {
+    type: 'ADD_FAMILY',
+    payload: family,
+  };
+}
+
+export function addTestimony(testimony) {
+  return {
+    type: 'ADD_TESTIMONY',
+    payload: testimony,
+  };
+}

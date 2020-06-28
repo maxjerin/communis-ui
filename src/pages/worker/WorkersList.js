@@ -1,18 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { Button, ButtonGroup, Card, Col, Row } from 'reactstrap';
 import { FaRegAddressBook } from 'react-icons/fa';
 import NotificationSystem from 'react-notification-system';
 import { NOTIFICATION_SYSTEM_STYLE } from './../../utils/constants';
 
-const NOTIFICATION_TIMEOUT_IN_MILLI_SEC = 1500;
-
 class WorkersList extends React.Component {
-  state = {
-    modal: false,
-  };
-
   componentWillReceiveProps(nextProps, nextContext) {}
 
   componentDidMount() {

@@ -13,6 +13,9 @@ import {
 import { withRouter } from 'react-router-dom';
 
 class Address extends React.Component {
+  persistField = (e, fieldName) =>
+    this.props.persist({ [fieldName]: e.target.value });
+
   render() {
     const { previous, next } = this.props;
 
@@ -31,6 +34,7 @@ class Address extends React.Component {
                         type="text"
                         name="addressLine1"
                         id="addressLine1"
+                        onChange={e => this.persistField(e, 'addressLine1')}
                       />
                     </FormGroup>
                   </Col>
@@ -43,6 +47,7 @@ class Address extends React.Component {
                         type="text"
                         name="addressLine2"
                         id="addressLine2"
+                        onChange={e => this.persistField(e, 'addressLine2')}
                       />
                     </FormGroup>
                   </Col>
@@ -51,7 +56,12 @@ class Address extends React.Component {
                   <Col>
                     <FormGroup>
                       <Label for="city">City</Label>
-                      <Input type="text" name="city" id="city" />
+                      <Input
+                        onChange={e => this.persistField(e, 'city')}
+                        type="text"
+                        name="city"
+                        id="city"
+                      />
                     </FormGroup>
                   </Col>
                 </Row>
@@ -59,19 +69,34 @@ class Address extends React.Component {
                   <Col>
                     <FormGroup>
                       <Label for="state">State</Label>
-                      <Input type="text" name="state" id="state" />
+                      <Input
+                        onChange={e => this.persistField(e, 'state')}
+                        type="text"
+                        name="state"
+                        id="state"
+                      />
                     </FormGroup>
                   </Col>
                   <Col>
                     <FormGroup>
                       <Label for="areaCode">Area Code</Label>
-                      <Input type="text" name="areaCode" id="areaCode" />
+                      <Input
+                        onChange={e => this.persistField(e, 'areaCode')}
+                        type="text"
+                        name="areaCode"
+                        id="areaCode"
+                      />
                     </FormGroup>
                   </Col>
                   <Col>
                     <FormGroup>
                       <Label for="country">Country</Label>
-                      <Input type="text" name="country" id="country" />
+                      <Input
+                        onChange={e => this.persistField(e, 'country')}
+                        type="text"
+                        name="country"
+                        id="country"
+                      />
                     </FormGroup>
                   </Col>
                 </Row>

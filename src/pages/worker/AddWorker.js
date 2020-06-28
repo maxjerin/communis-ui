@@ -12,6 +12,10 @@ import Family from '../../components/Worker/AddWorkerWorkflow/Family';
 import {
   resetWorkerWorkflow as dispatchResetWorkerWorkflow,
   setCurrentWorkflowPage as dispatchSetCurrentWorkflowPage,
+  addPersonalDetails as dispatchAddPersonalDetails,
+  addAddress as dispatchAddAddress,
+  addFamily as dispatchAddFamily,
+  addTestimony as dispatchAddTestimony,
   setWorkflowState,
 } from '../../actions/workerActions';
 
@@ -71,6 +75,11 @@ class AddWorker extends React.Component {
       currentWorkflowPage,
       setCurrentWorkflowPage,
       workflowState,
+      addPersonalDetails,
+      addFamily,
+      addTestimony,
+      addAddress,
+      worker,
     } = this.props;
 
     if (currentWorkflowPage === null && workflowState !== null) {
@@ -95,30 +104,35 @@ class AddWorker extends React.Component {
               <Col>
                 {isCurrentWorkflowPage('family') ? (
                   <Family
+                    persist={addFamily}
                     previous={this.previousPage()}
                     next={this.nextPage()}
                   />
                 ) : null}
                 {isCurrentWorkflowPage('personalDetails') ? (
                   <PersonalDetails
+                    persist={addPersonalDetails}
                     previous={this.previousPage()}
                     next={this.nextPage()}
                   />
                 ) : null}
                 {isCurrentWorkflowPage('address') ? (
                   <Address
+                    persist={addAddress}
                     previous={this.previousPage()}
                     next={this.nextPage()}
                   />
                 ) : null}
                 {isCurrentWorkflowPage('testimony') ? (
                   <Testimony
+                    persist={addTestimony}
                     previous={this.previousPage()}
                     next={this.nextPage()}
                   />
                 ) : null}
                 {isCurrentWorkflowPage('summary') ? (
                   <Summary
+                    summary={worker}
                     previous={this.previousPage()}
                     next={this.nextPage()}
                   />
@@ -155,6 +169,11 @@ function mapDispatchToProps(dispatch, ownProps) {
     setCurrentWorkflowPage: page =>
       dispatch(dispatchSetCurrentWorkflowPage(page)),
     resetWorkerWorkflow: () => dispatch(dispatchResetWorkerWorkflow()),
+    addPersonalDetails: personalDetails =>
+      dispatch(dispatchAddPersonalDetails(personalDetails)),
+    addAddress: address => dispatch(dispatchAddAddress(address)),
+    addFamily: family => dispatch(dispatchAddFamily(family)),
+    addTestimony: testimony => dispatch(dispatchAddTestimony(testimony)),
   };
 }
 

@@ -13,6 +13,9 @@ import {
 import { withRouter } from 'react-router-dom';
 
 class Family extends React.Component {
+  persistField = (e, fieldName) =>
+    this.props.persist({ [fieldName]: e.target.value });
+
   render() {
     const { previous, next } = this.props;
 
@@ -27,7 +30,12 @@ class Family extends React.Component {
                   <Col>
                     <FormGroup>
                       <Label for="familyName">Family Name</Label>
-                      <Input type="text" name="familyName" id="familyName" />
+                      <Input
+                        onChange={e => this.persistField(e, 'familyName')}
+                        type="text"
+                        name="familyName"
+                        id="familyName"
+                      />
                     </FormGroup>
                   </Col>
                 </Row>
@@ -36,6 +44,7 @@ class Family extends React.Component {
                     <FormGroup>
                       <Label for="relationshipType">Relationship Type</Label>
                       <Input
+                        onChange={e => this.persistField(e, 'relationshipType')}
                         type="select"
                         name="relationshipType"
                         id="relationshipType"

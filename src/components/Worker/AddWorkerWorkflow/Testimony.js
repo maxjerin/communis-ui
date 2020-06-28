@@ -13,6 +13,9 @@ import {
 import { withRouter } from 'react-router-dom';
 
 class Testimony extends React.Component {
+  persistField = (e, fieldName) =>
+    this.props.persist({ [fieldName]: e.target.value });
+
   render() {
     const { previous, next } = this.props;
 
@@ -27,7 +30,12 @@ class Testimony extends React.Component {
                   <Col>
                     <FormGroup>
                       <Label for="testimony">Testimony</Label>
-                      <Input type="textarea" name="testimony" id="testimony" />
+                      <Input
+                        onChange={e => this.persistField(e, 'testimony')}
+                        type="textarea"
+                        name="testimony"
+                        id="testimony"
+                      />
                     </FormGroup>
                   </Col>
                 </Row>

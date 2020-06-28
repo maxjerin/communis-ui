@@ -13,7 +13,32 @@ import { withRouter } from 'react-router-dom';
 
 class Summary extends React.Component {
   render() {
-    const { previous, next } = this.props;
+    const {
+      previous,
+      next,
+      summary: { personalDetails, address, testimony, family },
+    } = this.props;
+    const {
+      firstName,
+      middleName,
+      lastName,
+      dateOfBirth,
+      gender,
+      cellPhone,
+      homePhone,
+      primaryEmail,
+      secondaryEmail,
+      primaryContactType,
+    } = personalDetails;
+    const {
+      addressLine1,
+      addressLine2,
+      city,
+      state,
+      areaCode,
+      country,
+    } = address;
+    const { familyName, relationshipType } = family;
 
     return (
       <Row>
@@ -28,7 +53,7 @@ class Summary extends React.Component {
                       <Label for="firstName">First Name:</Label>
                       <Col>
                         <Label name="firstName" id="firstName">
-                          Jerin
+                          {firstName}
                         </Label>
                       </Col>
                     </FormGroup>
@@ -38,7 +63,7 @@ class Summary extends React.Component {
                       <Label for="middleName">Middle Name:</Label>
                       <Col>
                         <Label name="middleName" id="middleName">
-                          {' '}
+                          {middleName}
                         </Label>
                       </Col>
                     </FormGroup>
@@ -48,7 +73,7 @@ class Summary extends React.Component {
                       <Label for="lastName">Last Name:</Label>
                       <Col>
                         <Label name="lastName" id="lastName">
-                          Mathew
+                          {lastName}
                         </Label>
                       </Col>
                     </FormGroup>
@@ -60,7 +85,7 @@ class Summary extends React.Component {
                       <Label for="dateOfBirth">Date of Birth:</Label>
                       <Col>
                         <Label name="dateOfBirth" id="dateOfBirth">
-                          01/01/2020
+                          {dateOfBirth}
                         </Label>
                       </Col>
                     </FormGroup>
@@ -70,7 +95,7 @@ class Summary extends React.Component {
                       <Label for="gender">Gender:</Label>
                       <Col>
                         <Label name="gender" id="gender">
-                          Male
+                          {gender}
                         </Label>
                       </Col>
                     </FormGroup>
@@ -87,7 +112,7 @@ class Summary extends React.Component {
                       <Label for="cellPhone">Cell Phone:</Label>
                       <Col>
                         <Label name="cellPhone" id="cellPhone">
-                          555-555-5555
+                          {cellPhone}
                         </Label>
                       </Col>
                     </FormGroup>
@@ -97,7 +122,7 @@ class Summary extends React.Component {
                       <Label for="homePhone">Home Phone:</Label>
                       <Col>
                         <Label name="homePhone" id="homePhone">
-                          555-555-5555
+                          {homePhone}
                         </Label>
                       </Col>
                     </FormGroup>
@@ -109,7 +134,7 @@ class Summary extends React.Component {
                       <Label for="primaryEmail">Primary Email:</Label>
                       <Col>
                         <Label name="primaryEmail" id="primaryEmail">
-                          abc@abc.com
+                          {primaryEmail}
                         </Label>
                       </Col>
                     </FormGroup>
@@ -119,7 +144,7 @@ class Summary extends React.Component {
                       <Label for="secondaryEmail">Secondary Email:</Label>
                       <Col>
                         <Label name="secondaryEmail" id="secondaryEmail">
-                          abc@abc.com
+                          {secondaryEmail}
                         </Label>
                       </Col>
                     </FormGroup>
@@ -136,7 +161,7 @@ class Summary extends React.Component {
                           name="primaryContactType"
                           id="primaryContactType"
                         >
-                          Cell Phone
+                          {primaryContactType}
                         </Label>
                       </Col>
                     </FormGroup>
@@ -153,7 +178,7 @@ class Summary extends React.Component {
                       <Label for="addressLine1">Address Line 1:</Label>
                       <Col>
                         <Label name="addressLine1" id="addressLine1">
-                          123 Some Street
+                          {addressLine1}
                         </Label>
                       </Col>
                     </FormGroup>
@@ -163,7 +188,7 @@ class Summary extends React.Component {
                       <Label for="addressLine2">Address Line 2:</Label>
                       <Col>
                         <Label name="addressLine2" id="addressLine2">
-                          Behind other street
+                          {addressLine2}
                         </Label>
                       </Col>
                     </FormGroup>
@@ -175,7 +200,7 @@ class Summary extends React.Component {
                       <Label for="city">City:</Label>
                       <Col>
                         <Label name="city" id="city">
-                          Bilaspur
+                          {city}
                         </Label>
                       </Col>
                     </FormGroup>
@@ -185,7 +210,7 @@ class Summary extends React.Component {
                       <Label for="state">State:</Label>
                       <Col>
                         <Label name="state" id="state">
-                          Chhattisgarh
+                          {state}
                         </Label>
                       </Col>
                     </FormGroup>
@@ -195,7 +220,7 @@ class Summary extends React.Component {
                       <Label for="areaCode">Area Code:</Label>
                       <Col>
                         <Label name="areaCode" id="areaCode">
-                          07003
+                          {areaCode}
                         </Label>
                       </Col>
                     </FormGroup>
@@ -212,15 +237,7 @@ class Summary extends React.Component {
                       <Label for="testimony">Testimony:</Label>
                       <Col>
                         <Label name="testimony" id="testimony">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
-                          nostrud exercitation ullamco laboris nisi ut aliquip
-                          ex ea commodo consequat. Duis aute irure dolor in
-                          reprehenderit in voluptate velit esse cillum dolore eu
-                          fugiat nulla pariatur. Excepteur sint occaecat
-                          cupidatat non proident, sunt in culpa qui officia
-                          deserunt mollit anim id est laborum.
+                          {testimony}
                         </Label>
                       </Col>
                     </FormGroup>

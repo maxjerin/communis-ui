@@ -11,13 +11,19 @@ const initialState = {
       lastName: '',
       dateOfBirth: '',
       gender: '',
-    },
-    contact: {
       cellPhone: '',
       homePhone: '',
       primaryEmail: '',
       secondaryEmail: '',
       primaryContactType: '',
+    },
+    address: {
+      addressLine1: '',
+      addressLine2: '',
+      city: '',
+      state: '',
+      areaCode: '',
+      country: '',
     },
     family: {
       familyName: '',
@@ -33,43 +39,44 @@ const reducer = (state = initialState, action) => {
     case 'ADD_PERSONAL_DETAILS': {
       return {
         ...state,
-        personalDetails: {
-          ...state.personalDetails,
-          firstName: payload.firstName,
-          middleName: payload.middleName,
-          lastName: payload.lastName,
-          dateOfBirth: payload.dateOfBirth,
-          gender: payload.gender,
-        },
-      };
-    }
-    case 'ADD_CONTACT': {
-      return {
-        ...state,
-        contact: {
-          ...state.contact,
-          cellPhone: payload.cellPhone,
-          homePhone: payload.homePhone,
-          primaryEmail: payload.primaryEmail,
-          secondaryEmail: payload.secondaryEmail,
-          primaryContactType: payload.primaryContactType,
+        worker: {
+          ...state.worker,
+          personalDetails: {
+            ...state.worker.personalDetails,
+            ...action.payload,
+          },
         },
       };
     }
     case 'ADD_FAMILY': {
       return {
         ...state,
-        family: {
-          ...state.family,
-          familyName: payload.familyName,
-          relationshipType: payload.relationshipType,
+        worker: {
+          family: {
+            ...state.worker.family,
+            ...action.payload,
+          },
+        },
+      };
+    }
+    case 'ADD_ADDRESS': {
+      return {
+        ...state,
+        worker: {
+          address: {
+            ...state.worker.address,
+            ...action.payload,
+          },
         },
       };
     }
     case 'ADD_TESTIMONY': {
       return {
         ...state,
-        testimony: payload.testimony,
+        worker: {
+          ...state.worker,
+          ...action.payload,
+        },
       };
     }
     case 'SET_WORKFLOW_STATE': {

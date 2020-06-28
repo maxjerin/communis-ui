@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Button,
   Card,
   CardBody,
   CardHeader,
@@ -13,6 +12,9 @@ import {
 import { withRouter } from 'react-router-dom';
 
 class PersonalDetails extends React.Component {
+  persistField = (e, fieldName) =>
+    this.props.persist({ [fieldName]: e.target.value });
+
   render() {
     const { previous, next } = this.props;
 
@@ -27,19 +29,34 @@ class PersonalDetails extends React.Component {
                   <Col>
                     <FormGroup>
                       <Label for="firstName">First Name</Label>
-                      <Input type="text" name="firstName" id="firstName" />
+                      <Input
+                        onChange={e => this.persistField(e, 'firstName')}
+                        type="text"
+                        name="firstName"
+                        id="firstName"
+                      />
                     </FormGroup>
                   </Col>
                   <Col>
                     <FormGroup>
                       <Label for="middleName">Middle Name</Label>
-                      <Input type="text" name="middleName" id="middleName" />
+                      <Input
+                        onChange={e => this.persistField(e, 'middleName')}
+                        type="text"
+                        name="middleName"
+                        id="middleName"
+                      />
                     </FormGroup>
                   </Col>
                   <Col>
                     <FormGroup>
                       <Label for="lastName">Last Name</Label>
-                      <Input type="text" name="lastName" id="lastName" />
+                      <Input
+                        onChange={e => this.persistField(e, 'lastName')}
+                        ype="text"
+                        name="lastName"
+                        id="lastName"
+                      />
                     </FormGroup>
                   </Col>
                 </Row>
@@ -47,13 +64,23 @@ class PersonalDetails extends React.Component {
                   <Col>
                     <FormGroup>
                       <Label for="dateOfBirth">Date of Birth</Label>
-                      <Input type="date" name="dateOfBirth" id="dateOfBirth" />
+                      <Input
+                        onChange={e => this.persistField(e, 'dateOfBirth')}
+                        type="date"
+                        name="dateOfBirth"
+                        id="dateOfBirth"
+                      />
                     </FormGroup>
                   </Col>
                   <Col>
                     <FormGroup>
                       <Label for="gender">Gender</Label>
-                      <Input type="select" name="gender" id="gender">
+                      <Input
+                        onChange={e => this.persistField(e, 'gender')}
+                        type="select"
+                        name="gender"
+                        id="gender"
+                      >
                         <option>Male</option>
                         <option>Female</option>
                       </Input>
@@ -72,13 +99,23 @@ class PersonalDetails extends React.Component {
                   <Col>
                     <FormGroup>
                       <Label for="cellPhone">Cell Phone</Label>
-                      <Input type="text" name="cellPhone" id="cellPhone" />
+                      <Input
+                        onChange={e => this.persistField(e, 'cellPhone')}
+                        type="text"
+                        name="cellPhone"
+                        id="cellPhone"
+                      />
                     </FormGroup>
                   </Col>
                   <Col>
                     <FormGroup>
                       <Label for="homePhone">Home Phone</Label>
-                      <Input type="text" name="homePhone" id="homePhone" />
+                      <Input
+                        onChange={e => this.persistField(e, 'homePhone')}
+                        type="text"
+                        name="homePhone"
+                        id="homePhone"
+                      />
                     </FormGroup>
                   </Col>
                 </Row>
@@ -86,7 +123,12 @@ class PersonalDetails extends React.Component {
                   <Col>
                     <FormGroup>
                       <Label for="workPhone">Work Phone</Label>
-                      <Input type="text" name="workPhone" id="workPhone" />
+                      <Input
+                        onChange={e => this.persistField(e, 'workPhone')}
+                        type="text"
+                        name="workPhone"
+                        id="workPhone"
+                      />
                     </FormGroup>
                   </Col>
                 </Row>
@@ -94,7 +136,12 @@ class PersonalDetails extends React.Component {
                   <Col>
                     <FormGroup>
                       <Label for="email">Email</Label>
-                      <Input type="text" name="email" id="email" />
+                      <Input
+                        onChange={e => this.persistField(e, 'email')}
+                        type="text"
+                        name="email"
+                        id="email"
+                      />
                     </FormGroup>
                   </Col>
                   <Col>
@@ -104,6 +151,7 @@ class PersonalDetails extends React.Component {
                         type="text"
                         name="secondaryEmail"
                         id="secondaryEmail"
+                        onChange={e => this.persistField(e, 'secondaryEmail')}
                       />
                     </FormGroup>
                   </Col>
@@ -118,6 +166,9 @@ class PersonalDetails extends React.Component {
                         type="select"
                         name="primaryContactType"
                         id="primaryContactType"
+                        onChange={e =>
+                          this.persistField(e, 'primaryContactType')
+                        }
                       >
                         <option>Cell Phone</option>
                         <option>Home Phone</option>
