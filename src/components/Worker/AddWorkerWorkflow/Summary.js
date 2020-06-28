@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Button,
   Card,
   CardBody,
   CardHeader,
@@ -12,6 +13,8 @@ import { withRouter } from 'react-router-dom';
 
 class Summary extends React.Component {
   render() {
+    const { previous, next } = this.props;
+
     return (
       <Row>
         <Col xl={6} md={12} lg={12}>
@@ -225,6 +228,10 @@ class Summary extends React.Component {
                 </Row>
               </CardBody>
             </Card>
+          </Row>
+          <Row>
+            <Col>{previous}</Col>
+            <Col>{next}</Col>
           </Row>
         </Col>
       </Row>

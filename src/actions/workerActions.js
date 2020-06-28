@@ -1,5 +1,9 @@
 import axios from 'axios';
-import { GLOBAL_CONSTANT } from '../utils/constants';
+import {
+  GLOBAL_CONSTANT,
+  WORKER_WITH_FAMILY_WORKFLOW_STATES,
+  WORKER_WORKFLOW_STATES,
+} from '../utils/constants';
 import { getLocalToken } from './../utils/jwtTokenUtils';
 
 export function createWorker(worker) {
@@ -26,5 +30,28 @@ export function createWorker(worker) {
           payload: err.response.data,
         });
       });
+  };
+}
+
+export function setWorkflowState(hasFamilyPage) {
+  const states = hasFamilyPage
+    ? WORKER_WITH_FAMILY_WORKFLOW_STATES
+    : WORKER_WORKFLOW_STATES;
+  return {
+    type: 'SET_WORKFLOW_STATE',
+    payload: states,
+  };
+}
+
+export function setCurrentWorkflowPage(workerWorkflowPage) {
+  return {
+    type: 'SET_CURRENT_WORKFLOW_PAGE',
+    payload: workerWorkflowPage,
+  };
+}
+
+export function resetWorkerWorkflow() {
+  return {
+    type: 'RESET_WORKER_WORKFLOW',
   };
 }

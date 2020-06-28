@@ -1,5 +1,9 @@
 const initialState = {
-  currentScreen: 'family',
+  workflow: {
+    hasFamilyPage: false,
+    currentWorkflowPage: null,
+    state: null,
+  },
   worker: {
     personalDetails: {
       firstName: '',
@@ -30,6 +34,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         personalDetails: {
+          ...state.personalDetails,
           firstName: payload.firstName,
           middleName: payload.middleName,
           lastName: payload.lastName,
@@ -42,6 +47,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         contact: {
+          ...state.contact,
           cellPhone: payload.cellPhone,
           homePhone: payload.homePhone,
           primaryEmail: payload.primaryEmail,
@@ -54,6 +60,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         family: {
+          ...state.family,
           familyName: payload.familyName,
           relationshipType: payload.relationshipType,
         },
@@ -65,10 +72,22 @@ const reducer = (state = initialState, action) => {
         testimony: payload.testimony,
       };
     }
-    case 'CHANGE_CURRENT_SCREEN': {
+    case 'SET_WORKFLOW_STATE': {
       return {
         ...state,
-        currentScreen: payload.currentScreen,
+        workflow: {
+          ...state.workflow,
+          state: payload,
+        },
+      };
+    }
+    case 'SET_CURRENT_WORKFLOW_PAGE': {
+      return {
+        ...state,
+        workflow: {
+          ...state.workflow,
+          currentWorkflowPage: payload,
+        },
       };
     }
     case 'RESET_WORKER_WORKFLOW': {

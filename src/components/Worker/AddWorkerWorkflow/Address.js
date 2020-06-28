@@ -1,19 +1,21 @@
 import React from 'react';
 import {
+  Button,
   Card,
   CardBody,
   CardHeader,
   Col,
-  Input,
   FormGroup,
+  Input,
   Label,
   Row,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
-import { FaRegAddressBook } from 'react-icons/fa';
 
 class Address extends React.Component {
   render() {
+    const { previous, next } = this.props;
+
     return (
       <Row>
         <Col xl={6} md={12} lg={12}>
@@ -75,6 +77,10 @@ class Address extends React.Component {
                 </Row>
               </CardBody>
             </Card>
+          </Row>
+          <Row>
+            <Col>{previous}</Col>
+            <Col>{next}</Col>
           </Row>
         </Col>
       </Row>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { Button, ButtonGroup, Card, Col, Row } from 'reactstrap';
+import { Button, Card, Col, Row } from 'reactstrap';
 import { FaRegAddressBook } from 'react-icons/fa';
 import NotificationSystem from 'react-notification-system';
 import { NOTIFICATION_SYSTEM_STYLE } from './../../utils/constants';
@@ -10,20 +9,76 @@ import Address from '../../components/Worker/AddWorkerWorkflow/Address';
 import Testimony from '../../components/Worker/AddWorkerWorkflow/Testimony';
 import Summary from '../../components/Worker/AddWorkerWorkflow/Summary';
 import Family from '../../components/Worker/AddWorkerWorkflow/Family';
+import {
+  resetWorkerWorkflow as dispatchResetWorkerWorkflow,
+  setCurrentWorkflowPage as dispatchSetCurrentWorkflowPage,
+  setWorkflowState,
+} from '../../actions/workerActions';
 
-const NOTIFICATION_TIMEOUT_IN_MILLI_SEC = 1500;
+const findFirstPage = workflowPages =>
+  workflowPages.filter(page => page.previous === null)[0].name;
+
+const findPage = (workflowPages, pageName) =>
+  workflowPages.filter(page => page.name === pageName)[0];
 
 class AddWorker extends React.Component {
-  componentDidMount() {
-    /* fetch worker list */
-  }
+  previousPage = () => {
+    const {
+      setCurrentWorkflowPage,
+      currentWorkflowPage,
+      workflowState,
+      resetWorkerWorkflow,
+    } = this.props;
+    const page = findPage(workflowState, currentWorkflowPage);
+    let action, name;
+    if (page.previous === null) {
+      action = () => {
+        resetWorkerWorkflow();
+        this.props.history.push('/workers');
+      };
+      name = 'Cancel';
+    } else {
+      action = () => setCurrentWorkflowPage(page.previous);
+      name = 'Previous';
+    }
+    return <Button onClick={action}>{name}</Button>;
+  };
 
-  exitWorkflow = () => this.props.history.push('/workers');
+  nextPage = () => {
+    const {
+      setCurrentWorkflowPage,
+      currentWorkflowPage,
+      workflowState,
+      resetWorkerWorkflow,
+    } = this.props;
+    const page = findPage(workflowState, currentWorkflowPage);
+    let action, name;
+    if (page.next === null) {
+      action = () => {
+        resetWorkerWorkflow();
+        this.props.history.push('/workers');
+      };
+      name = 'Finish';
+    } else {
+      action = () => setCurrentWorkflowPage(page.next);
+      name = 'Next';
+    }
+    return <Button onClick={action}>{name}</Button>;
+  };
 
   render() {
-    const { currentScreen } = this.props;
-    const isCurrentWorkflowScreen = selectedScreen =>
-      currentScreen === selectedScreen;
+    const {
+      currentWorkflowPage,
+      setCurrentWorkflowPage,
+      workflowState,
+    } = this.props;
+
+    if (currentWorkflowPage === null && workflowState !== null) {
+      const firstPage = findFirstPage(workflowState);
+      setCurrentWorkflowPage(firstPage);
+    }
+    const isCurrentWorkflowPage = selectedWorkflowPage =>
+      selectedWorkflowPage === currentWorkflowPage;
 
     return (
       <Row>
@@ -38,21 +93,36 @@ class AddWorker extends React.Component {
             </Row>
             <Row>
               <Col>
-                {isCurrentWorkflowScreen('family') ? <Family /> : null}
-                {isCurrentWorkflowScreen('personalDetail') ? (
-                  <PersonalDetails />
+                {isCurrentWorkflowPage('family') ? (
+                  <Family
+                    previous={this.previousPage()}
+                    next={this.nextPage()}
+                  />
                 ) : null}
-                {isCurrentWorkflowScreen('address') ? <Address /> : null}
-                {isCurrentWorkflowScreen('testimony') ? <Testimony /> : null}
-                {isCurrentWorkflowScreen('summary') ? <Summary /> : null}
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Button onClick={this.exitWorkflow}>Cancel</Button>
-              </Col>
-              <Col>
-                <Button onClick={this.exitWorkflow}>Next</Button>
+                {isCurrentWorkflowPage('personalDetails') ? (
+                  <PersonalDetails
+                    previous={this.previousPage()}
+                    next={this.nextPage()}
+                  />
+                ) : null}
+                {isCurrentWorkflowPage('address') ? (
+                  <Address
+                    previous={this.previousPage()}
+                    next={this.nextPage()}
+                  />
+                ) : null}
+                {isCurrentWorkflowPage('testimony') ? (
+                  <Testimony
+                    previous={this.previousPage()}
+                    next={this.nextPage()}
+                  />
+                ) : null}
+                {isCurrentWorkflowPage('summary') ? (
+                  <Summary
+                    previous={this.previousPage()}
+                    next={this.nextPage()}
+                  />
+                ) : null}
               </Col>
             </Row>
 
@@ -74,8 +144,22 @@ function mapStateToProps(store) {
   return {
     router: store.router,
     worker: store.workerWorkflow.worker,
-    currentScreen: store.workerWorkflow.currentScreen,
+    currentWorkflowPage: store.workerWorkflow.workflow.currentWorkflowPage,
+    workflowState: store.workerWorkflow.workflow.state,
   };
 }
 
-export default connect(mapStateToProps)(AddWorker);
+function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    setWorkflowState: dispatch(setWorkflowState(ownProps.hasFamilyPage)),
+    setCurrentWorkflowPage: page =>
+      dispatch(dispatchSetCurrentWorkflowPage(page)),
+    resetWorkerWorkflow: () => dispatch(dispatchResetWorkerWorkflow()),
+  };
+}
+
+AddWorker.defaultProps = {
+  hasFamilyPage: false,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddWorker);

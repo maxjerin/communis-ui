@@ -13,6 +13,47 @@ export const GLOBAL_CONSTANT = {
   },
 };
 
+const BASE_WORKER_WORKFLOW_STATES = [
+  {
+    name: 'address',
+    previous: 'personalDetails',
+    next: 'testimony',
+  },
+  {
+    name: 'testimony',
+    previous: 'address',
+    next: 'summary',
+  },
+  {
+    name: 'summary',
+    previous: 'testimony',
+    next: null,
+  },
+];
+
+export const WORKER_WORKFLOW_STATES = [
+  {
+    name: 'personalDetails',
+    previous: null,
+    next: 'address',
+  },
+  ...BASE_WORKER_WORKFLOW_STATES,
+];
+
+export const WORKER_WITH_FAMILY_WORKFLOW_STATES = [
+  {
+    name: 'family',
+    previous: null,
+    next: 'personalDetails',
+  },
+  {
+    name: 'personalDetails',
+    previous: 'family',
+    next: 'address',
+  },
+  ...BASE_WORKER_WORKFLOW_STATES,
+];
+
 export const NOTIFICATION_SYSTEM_STYLE = {
   NotificationItem: {
     DefaultStyle: {
