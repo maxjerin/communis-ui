@@ -9,6 +9,7 @@ export const GLOBAL_CONSTANT = {
     MISSION_REGION: DOMAIN + '/api/mission/region',
     MISSION_SUB_REGION: DOMAIN + '/api/mission/region/$regionId/subRegion',
     MISSION_REGION_TIERS: DOMAIN + '/api/mission/region/tiers',
+    WORKER_PROFILE: DOMAIN + '/api/services/person',
   },
 };
 
