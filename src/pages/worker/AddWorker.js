@@ -133,6 +133,7 @@ class AddWorker extends React.Component {
                 {isCurrentWorkflowPage('summary') ? (
                   <Summary
                     summary={worker}
+                    hasFamily={workflowState.hasFamily}
                     previous={this.previousPage()}
                     next={this.nextPage()}
                   />

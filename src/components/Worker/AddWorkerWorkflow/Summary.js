@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Button,
   Card,
   CardBody,
   CardHeader,
@@ -17,6 +16,7 @@ class Summary extends React.Component {
       previous,
       next,
       summary: { personalDetails, address, testimony, family },
+      hasFamily,
     } = this.props;
     const {
       firstName,
@@ -44,6 +44,35 @@ class Summary extends React.Component {
       <Row>
         <Col xl={6} md={12} lg={12}>
           <Row>
+            {hasFamily && (
+              <Card>
+                <CardHeader>Family</CardHeader>
+                <CardBody>
+                  <Row>
+                    <Col>
+                      <FormGroup row>
+                        <Label for="familyName">Family Name:</Label>
+                        <Col>
+                          <Label name="familyName" id="familyName">
+                            {familyName}
+                          </Label>
+                        </Col>
+                      </FormGroup>
+                    </Col>
+                    <Col>
+                      <FormGroup row>
+                        <Label for="relationshipType">Relationship Type:</Label>
+                        <Col>
+                          <Label name="relationshipType" id="relationshipType">
+                            {relationshipType}
+                          </Label>
+                        </Col>
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                </CardBody>
+              </Card>
+            )}
             <Card>
               <CardHeader>Personal Details</CardHeader>
               <CardBody>
@@ -221,6 +250,18 @@ class Summary extends React.Component {
                       <Col>
                         <Label name="areaCode" id="areaCode">
                           {areaCode}
+                        </Label>
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <FormGroup row>
+                      <Label for="country">Country:</Label>
+                      <Col>
+                        <Label name="country" id="country">
+                          {country}
                         </Label>
                       </Col>
                     </FormGroup>
