@@ -52,6 +52,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         worker: {
+          ...state.worker,
           family: {
             ...state.worker.family,
             ...action.payload,
@@ -63,6 +64,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         worker: {
+          ...state.worker,
           address: {
             ...state.worker.address,
             ...action.payload,
