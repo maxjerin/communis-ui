@@ -49,6 +49,7 @@ class Family extends React.Component {
                         name="relationshipType"
                         id="relationshipType"
                       >
+                        <option></option>
                         <option>Husband</option>
                         <option>Wife</option>
                         <option>Son</option>
