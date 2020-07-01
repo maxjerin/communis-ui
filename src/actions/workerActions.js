@@ -5,13 +5,14 @@ import {
   WORKER_WORKFLOW_STATES,
 } from '../utils/constants';
 import { getLocalToken } from './../utils/jwtTokenUtils';
+import { serializeWorker } from '../services/workerService';
 
-export function createWorker(worker) {
+export function addWorker(worker) {
   return function (dispatch) {
     axios({
       method: 'POST',
       url: GLOBAL_CONSTANT.ENDPOINTS.WORKER_PROFILE,
-      data: worker,
+      data: serializeWorker(worker),
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -23,11 +24,17 @@ export function createWorker(worker) {
           type: 'CREATE_WORKER_FULFILLED',
           payload: response.data,
         });
+        dispatch({
+          type: 'RESET_WORKER_WORKFLOW',
+        });
       })
       .catch(err => {
         dispatch({
           type: 'CREATE_WORKER_REJECTED',
           payload: err.response.data,
+        });
+        dispatch({
+          type: 'RESET_WORKER_WORKFLOW',
         });
       });
   };

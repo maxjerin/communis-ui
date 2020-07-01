@@ -10,12 +10,13 @@ import Testimony from '../../components/Worker/AddWorkerWorkflow/Testimony';
 import Summary from '../../components/Worker/AddWorkerWorkflow/Summary';
 import Family from '../../components/Worker/AddWorkerWorkflow/Family';
 import {
-  resetWorkerWorkflow as dispatchResetWorkerWorkflow,
-  setCurrentWorkflowPage as dispatchSetCurrentWorkflowPage,
-  addPersonalDetails as dispatchAddPersonalDetails,
   addAddress as dispatchAddAddress,
   addFamily as dispatchAddFamily,
+  addPersonalDetails as dispatchAddPersonalDetails,
   addTestimony as dispatchAddTestimony,
+  addWorker as dispatchAddWorker,
+  resetWorkerWorkflow as dispatchResetWorkerWorkflow,
+  setCurrentWorkflowPage as dispatchSetCurrentWorkflowPage,
   setWorkflowState,
 } from '../../actions/workerActions';
 
@@ -50,16 +51,17 @@ class AddWorker extends React.Component {
 
   nextPage = () => {
     const {
+      addWorker,
       setCurrentWorkflowPage,
       currentWorkflowPage,
       workflowState,
-      resetWorkerWorkflow,
+      worker,
     } = this.props;
     const page = findPage(workflowState, currentWorkflowPage);
     let action, name;
     if (page.next === null) {
       action = () => {
-        resetWorkerWorkflow();
+        addWorker(worker);
         this.props.history.push('/workers');
       };
       name = 'Finish';
@@ -175,6 +177,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     addAddress: address => dispatch(dispatchAddAddress(address)),
     addFamily: family => dispatch(dispatchAddFamily(family)),
     addTestimony: testimony => dispatch(dispatchAddTestimony(testimony)),
+    addWorker: worker => dispatch(dispatchAddWorker(worker)),
   };
 }
 
