@@ -3,7 +3,7 @@ export const serializeWorker = worker => {
     firstName: worker.personalDetails.firstName,
     lastName: worker.personalDetails.lastName,
     dateOfBirth: worker.personalDetails.dateOfBirth,
-    gender: worker.personalDetails.gender.toUpperCase(),
+    gender: worker.personalDetails.gender,
     address: [
       {
         street: worker.address.addressLine1,

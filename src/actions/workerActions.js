@@ -5,7 +5,7 @@ import {
   WORKER_WORKFLOW_STATES,
 } from '../utils/constants';
 import { getLocalToken } from './../utils/jwtTokenUtils';
-import { serializeWorker } from '../services/workerService';
+import { serializeWorker } from '../transformers/workerTransfomer';
 
 export function addWorker(worker) {
   return function (dispatch) {
