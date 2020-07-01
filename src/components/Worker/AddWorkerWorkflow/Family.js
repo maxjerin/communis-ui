@@ -49,11 +49,11 @@ class Family extends React.Component {
                         name="relationshipType"
                         id="relationshipType"
                       >
-                        <option></option>
-                        <option>Husband</option>
-                        <option>Wife</option>
-                        <option>Son</option>
-                        <option>Daughter</option>
+                        <option value="">Select a Relationship</option>
+                        <option value="HUSBAND">Husband</option>
+                        <option value="WIFE">Wife</option>
+                        <option value="SON">Son</option>
+                        <option value="DAUGHTER">Daughter</option>
                       </Input>
                     </FormGroup>
                   </Col>

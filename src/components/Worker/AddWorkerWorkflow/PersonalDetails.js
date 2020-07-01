@@ -81,9 +81,9 @@ class PersonalDetails extends React.Component {
                         name="gender"
                         id="gender"
                       >
-                        <option></option>
-                        <option>Male</option>
-                        <option>Female</option>
+                        <option value="">Select Gender</option>
+                        <option value="MALE">Male</option>
+                        <option value="FEMALE">Female</option>
                       </Input>
                     </FormGroup>
                   </Col>

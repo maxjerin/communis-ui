@@ -17,7 +17,7 @@ class Address extends React.Component {
     this.props.persist({ [fieldName]: e.target.value });
 
   render() {
-    const { previous, next } = this.props;
+    const { countries, previous, next } = this.props;
 
     return (
       <Row>
@@ -93,10 +93,15 @@ class Address extends React.Component {
                       <Label for="country">Country</Label>
                       <Input
                         onChange={e => this.persistField(e, 'country')}
-                        type="text"
+                        type="select"
                         name="country"
                         id="country"
-                      />
+                      >
+                        <option value="">Select Country</option>
+                        {countries.map(country => (
+                          <option value={country.code}>{country.name}</option>
+                        ))}
+                      </Input>
                     </FormGroup>
                   </Col>
                 </Row>

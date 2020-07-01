@@ -75,6 +75,7 @@ class AddWorker extends React.Component {
   render() {
     const {
       currentWorkflowPage,
+      countries,
       setCurrentWorkflowPage,
       workflowState,
       addPersonalDetails,
@@ -123,6 +124,7 @@ class AddWorker extends React.Component {
                     persist={addAddress}
                     previous={this.previousPage()}
                     next={this.nextPage()}
+                    countries={countries}
                   />
                 ) : null}
                 {isCurrentWorkflowPage('testimony') ? (
@@ -163,6 +165,7 @@ function mapStateToProps(store) {
     worker: store.workerWorkflow.worker,
     currentWorkflowPage: store.workerWorkflow.workflow.currentWorkflowPage,
     workflowState: store.workerWorkflow.workflow.state,
+    countries: store.metaData.countries,
   };
 }
 
