@@ -17,7 +17,7 @@ class Testimony extends React.Component {
     this.props.persist({ [fieldName]: e.target.value });
 
   render() {
-    const { previous, next } = this.props;
+    const { details, previous, next } = this.props;
 
     return (
       <Row>
@@ -35,6 +35,7 @@ class Testimony extends React.Component {
                         type="textarea"
                         name="testimony"
                         id="testimony"
+                        value={details}
                       />
                     </FormGroup>
                   </Col>

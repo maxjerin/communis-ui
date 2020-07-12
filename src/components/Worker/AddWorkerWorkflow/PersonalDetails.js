@@ -16,7 +16,7 @@ class PersonalDetails extends React.Component {
     this.props.persist({ [fieldName]: e.target.value });
 
   render() {
-    const { previous, next } = this.props;
+    const { details, previous, next } = this.props;
 
     return (
       <Row>
@@ -34,6 +34,7 @@ class PersonalDetails extends React.Component {
                         type="text"
                         name="firstName"
                         id="firstName"
+                        value={details.firstName}
                       />
                     </FormGroup>
                   </Col>
@@ -45,6 +46,7 @@ class PersonalDetails extends React.Component {
                         type="text"
                         name="middleName"
                         id="middleName"
+                        value={details.middleName}
                       />
                     </FormGroup>
                   </Col>
@@ -56,6 +58,7 @@ class PersonalDetails extends React.Component {
                         ype="text"
                         name="lastName"
                         id="lastName"
+                        value={details.lastName}
                       />
                     </FormGroup>
                   </Col>
@@ -69,6 +72,7 @@ class PersonalDetails extends React.Component {
                         type="date"
                         name="dateOfBirth"
                         id="dateOfBirth"
+                        value={details.dateOfBirth}
                       />
                     </FormGroup>
                   </Col>
@@ -80,6 +84,7 @@ class PersonalDetails extends React.Component {
                         type="select"
                         name="gender"
                         id="gender"
+                        value={details.gender}
                       >
                         <option value="">Select Gender</option>
                         <option value="MALE">Male</option>
@@ -105,6 +110,7 @@ class PersonalDetails extends React.Component {
                         type="text"
                         name="cellPhone"
                         id="cellPhone"
+                        value={details.cellPhone}
                       />
                     </FormGroup>
                   </Col>
@@ -116,6 +122,7 @@ class PersonalDetails extends React.Component {
                         type="text"
                         name="homePhone"
                         id="homePhone"
+                        value={details.homePhone}
                       />
                     </FormGroup>
                   </Col>
@@ -129,6 +136,7 @@ class PersonalDetails extends React.Component {
                         type="text"
                         name="workPhone"
                         id="workPhone"
+                        value={details.workPhone}
                       />
                     </FormGroup>
                   </Col>
@@ -142,6 +150,7 @@ class PersonalDetails extends React.Component {
                         type="text"
                         name="email"
                         id="email"
+                        value={details.email}
                       />
                     </FormGroup>
                   </Col>
@@ -153,6 +162,7 @@ class PersonalDetails extends React.Component {
                         name="secondaryEmail"
                         id="secondaryEmail"
                         onChange={e => this.persistField(e, 'secondaryEmail')}
+                        value={details.secondaryEmail}
                       />
                     </FormGroup>
                   </Col>
@@ -170,6 +180,7 @@ class PersonalDetails extends React.Component {
                         onChange={e =>
                           this.persistField(e, 'primaryContactType')
                         }
+                        value={details.primaryContactType}
                       >
                         <option>Cell Phone</option>
                         <option>Home Phone</option>

@@ -17,7 +17,7 @@ class Address extends React.Component {
     this.props.persist({ [fieldName]: e.target.value });
 
   render() {
-    const { countries, previous, next } = this.props;
+    const { countries, details, previous, next } = this.props;
 
     return (
       <Row>
@@ -35,6 +35,7 @@ class Address extends React.Component {
                         name="addressLine1"
                         id="addressLine1"
                         onChange={e => this.persistField(e, 'addressLine1')}
+                        value={details.addressLine1}
                       />
                     </FormGroup>
                   </Col>
@@ -48,6 +49,7 @@ class Address extends React.Component {
                         name="addressLine2"
                         id="addressLine2"
                         onChange={e => this.persistField(e, 'addressLine2')}
+                        value={details.addressLine2}
                       />
                     </FormGroup>
                   </Col>
@@ -61,6 +63,7 @@ class Address extends React.Component {
                         type="text"
                         name="city"
                         id="city"
+                        value={details.city}
                       />
                     </FormGroup>
                   </Col>
@@ -74,6 +77,7 @@ class Address extends React.Component {
                         type="text"
                         name="state"
                         id="state"
+                        value={details.state}
                       />
                     </FormGroup>
                   </Col>
@@ -85,6 +89,7 @@ class Address extends React.Component {
                         type="text"
                         name="areaCode"
                         id="areaCode"
+                        value={details.areaCode}
                       />
                     </FormGroup>
                   </Col>
@@ -96,10 +101,13 @@ class Address extends React.Component {
                         type="select"
                         name="country"
                         id="country"
+                        value={details.country}
                       >
                         <option value="">Select Country</option>
                         {countries.map(country => (
-                          <option value={country.code}>{country.name}</option>
+                          <option key={country.code} value={country.code}>
+                            {country.name}
+                          </option>
                         ))}
                       </Input>
                     </FormGroup>
