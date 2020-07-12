@@ -1,6 +1,7 @@
 export const serializeWorker = worker => {
   return {
     firstName: worker.personalDetails.firstName,
+    middleName: worker.personalDetails.middleName,
     lastName: worker.personalDetails.lastName,
     dateOfBirth: worker.personalDetails.dateOfBirth,
     gender: worker.personalDetails.gender.toUpperCase(),
