@@ -111,6 +111,7 @@ class AddWorker extends React.Component {
                     persist={addFamily}
                     previous={this.previousPage()}
                     next={this.nextPage()}
+                    details={worker.family}
                   />
                 ) : null}
                 {isCurrentWorkflowPage('personalDetails') ? (

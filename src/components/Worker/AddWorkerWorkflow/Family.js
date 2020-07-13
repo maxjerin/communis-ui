@@ -17,7 +17,7 @@ class Family extends React.Component {
     this.props.persist({ [fieldName]: e.target.value });
 
   render() {
-    const { previous, next } = this.props;
+    const { details, previous, next } = this.props;
 
     return (
       <Row>
@@ -35,6 +35,7 @@ class Family extends React.Component {
                         type="text"
                         name="familyName"
                         id="familyName"
+                        value={details.familyName}
                       />
                     </FormGroup>
                   </Col>
@@ -48,6 +49,7 @@ class Family extends React.Component {
                         type="select"
                         name="relationshipType"
                         id="relationshipType"
+                        value={details.relationshipType}
                       >
                         <option value="">Select a Relationship</option>
                         <option value="HUSBAND">Husband</option>
