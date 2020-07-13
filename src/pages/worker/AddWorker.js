@@ -33,6 +33,7 @@ class AddWorker extends React.Component {
       currentWorkflowPage,
       workflowState,
       resetWorkerWorkflow,
+      worker,
     } = this.props;
     const page = findPage(workflowState, currentWorkflowPage);
     let action, name;
@@ -117,6 +118,7 @@ class AddWorker extends React.Component {
                     persist={addPersonalDetails}
                     previous={this.previousPage()}
                     next={this.nextPage()}
+                    details={worker.personalDetails}
                   />
                 ) : null}
                 {isCurrentWorkflowPage('address') ? (
@@ -125,6 +127,7 @@ class AddWorker extends React.Component {
                     previous={this.previousPage()}
                     next={this.nextPage()}
                     countries={countries}
+                    details={worker.address}
                   />
                 ) : null}
                 {isCurrentWorkflowPage('testimony') ? (
@@ -132,6 +135,7 @@ class AddWorker extends React.Component {
                     persist={addTestimony}
                     previous={this.previousPage()}
                     next={this.nextPage()}
+                    details={worker.testimony}
                   />
                 ) : null}
                 {isCurrentWorkflowPage('summary') ? (
