@@ -7,6 +7,32 @@ import {
 import { getLocalToken } from './../utils/jwtTokenUtils';
 import { serializeWorker } from '../transformers/workerTransfomer';
 
+export function fetchWorkers() {
+  return function (dispatch) {
+    axios({
+      method: 'get',
+      url: GLOBAL_CONSTANT.ENDPOINTS.WORKERS,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-Auth-Token': getLocalToken(),
+      },
+    })
+      .then(response => {
+        dispatch({
+          type: 'FETCH_WORKERS_FULLFILLED',
+          payload: response.data.data,
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: 'FETCH_WORKERS_REJECTED',
+          payload: err.response.data,
+        });
+      });
+  };
+}
+
 export function addWorker(worker) {
   return function (dispatch) {
     axios({

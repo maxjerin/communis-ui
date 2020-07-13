@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Table } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
+import { generateKey } from '../../utils/components';
 
 class WorkerProfileGrid extends React.Component {
   onViewWorkerProfile = worker => {
@@ -27,15 +28,16 @@ class WorkerProfileGrid extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {this.props.workers.map(worker => (
-            <tr>
-              <td>{worker.firstName}</td>
-              <td>{worker.middleName}</td>
-              <td>{worker.lastName}</td>
-              <td>{worker.dateOfBirth}</td>
-              <td>{worker.gender}</td>
-              <td>{worker.address}</td>
-              <td>
+          {this.props.workers.map((worker, index) => (
+            <tr key={generateKey(index)}>
+              <td key={generateKey(worker.firstName)}>{worker.firstName}</td>
+              <td key={generateKey(worker.middleName)}>{worker.middleName}</td>
+              <td key={generateKey(worker.lastName)}>{worker.lastName}</td>
+              <td key={generateKey(worker.dateOfBirth)}>
+                {worker.dateOfBirth}
+              </td>
+              <td key={generateKey(worker.gender)}>{worker.gender}</td>
+              <td key={generateKey('profile')}>
                 <Button
                   color="link"
                   size="sm"
