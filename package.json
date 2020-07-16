@@ -30,6 +30,7 @@
     "reactstrap": "^7.1.0",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
+    "shortid": "^2.2.15",
     "victory": "^32.0.0"
   },
   "devDependencies": {
