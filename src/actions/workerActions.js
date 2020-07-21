@@ -5,7 +5,10 @@ import {
   WORKER_WORKFLOW_STATES,
 } from '../utils/constants';
 import { getLocalToken } from './../utils/jwtTokenUtils';
-import { serializeWorker } from '../transformers/workerTransfomer';
+import {
+  deserializeWorker,
+  serializeWorker,
+} from '../transformers/workerTransfomer';
 
 export function fetchWorkers() {
   return function (dispatch) {
@@ -114,5 +117,14 @@ export function addTestimony(testimony) {
   return {
     type: 'ADD_TESTIMONY',
     payload: testimony,
+  };
+}
+
+export function selectWorker(worker) {
+  return dispatch => {
+    dispatch({
+      type: 'SELECT_WORKER',
+      payload: deserializeWorker(worker),
+    });
   };
 }

@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
   workflow: {
     hasFamilyPage: false,
     currentWorkflowPage: null,
