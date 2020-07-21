@@ -5,11 +5,8 @@ import { generateKey } from '../../utils/components';
 
 class WorkerProfileGrid extends React.Component {
   onViewWorkerProfile = worker => {
-    let path = '/worker-profile';
     this.props.history.push({
-      pathname: path,
-      search: '?query=abc',
-      state: { worker: worker },
+      pathname: `/worker-profile/${worker.id}`,
     });
   };
 
