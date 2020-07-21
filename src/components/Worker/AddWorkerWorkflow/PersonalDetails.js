@@ -16,7 +16,7 @@ class PersonalDetails extends React.Component {
     this.props.persist({ [fieldName]: e.target.value });
 
   render() {
-    const { details, previous, next } = this.props;
+    const { details, showNavigation, previous, next } = this.props;
 
     return (
       <Row>
@@ -182,11 +182,14 @@ class PersonalDetails extends React.Component {
                         }
                         value={details.primaryContactType}
                       >
-                        <option>Cell Phone</option>
-                        <option>Home Phone</option>
-                        <option>Work Phone</option>
-                        <option>Email</option>
-                        <option>Secondary Email</option>
+                        <option value={''}>Select Primary Contact Type</option>
+                        <option value={'CELL_PHONE'}>Cell Phone</option>
+                        <option value={'HOME_PHONE'}>Home Phone</option>
+                        <option value={'WORK_PHONE'}>Work Phone</option>
+                        <option value={'EMAIL'}>Email</option>
+                        <option value={'SECONDARY_EMAIL'}>
+                          Secondary Email
+                        </option>
                       </Input>
                     </FormGroup>
                   </Col>
@@ -194,14 +197,31 @@ class PersonalDetails extends React.Component {
               </CardBody>
             </Card>
           </Row>
-          <Row>
-            <Col>{previous}</Col>
-            <Col>{next}</Col>
-          </Row>
+          {showNavigation ? (
+            <Row>
+              <Col>{previous}</Col>
+              <Col>{next}</Col>
+            </Row>
+          ) : null}
         </Col>
       </Row>
     );
   }
 }
+
+PersonalDetails.defaultProps = {
+  firstName: '',
+  middleName: '',
+  lastName: '',
+  dateOfBirth: '',
+  gender: '',
+  cellPhone: '',
+  homePhone: '',
+  workPhone: '',
+  email: '',
+  secondaryEmail: '',
+  primaryContactType: '',
+  showNavigation: true,
+};
 
 export default withRouter(PersonalDetails);

@@ -17,7 +17,7 @@ class Testimony extends React.Component {
     this.props.persist({ [fieldName]: e.target.value });
 
   render() {
-    const { details, previous, next } = this.props;
+    const { details, showNavigation, previous, next } = this.props;
 
     return (
       <Row>
@@ -43,14 +43,21 @@ class Testimony extends React.Component {
               </CardBody>
             </Card>
           </Row>
-          <Row>
-            <Col>{previous}</Col>
-            <Col>{next}</Col>
-          </Row>
+          {showNavigation ? (
+            <Row>
+              <Col>{previous}</Col>
+              <Col>{next}</Col>
+            </Row>
+          ) : null}
         </Col>
       </Row>
     );
   }
 }
+
+Testimony.defaultProps = {
+  testimony: '',
+  showNavigation: true,
+};
 
 export default withRouter(Testimony);
