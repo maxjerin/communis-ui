@@ -20,27 +20,27 @@ export const serializeWorker = worker => {
     contacts: [
       {
         type: 'CELL_PHONE',
-        value: '210-209-0912',
+        value: worker.personalDetails.cellPhone,
         primary: worker.personalDetails.primaryContactType === 'CELL_PHONE',
       },
       {
         type: 'HOME_PHONE',
-        value: '210-209-0912',
+        value: worker.personalDetails.homePhone,
         primary: worker.personalDetails.primaryContactType === 'HOME_PHONE',
       },
       {
         type: 'WORK_PHONE',
-        value: '210-209-0912',
+        value: worker.personalDetails.workPhone,
         primary: worker.personalDetails.primaryContactType === 'WORK_PHONE',
       },
       {
         type: 'EMAIL',
-        value: '210-209-0912',
+        value: worker.personalDetails.email,
         primary: worker.personalDetails.primaryContactType === 'EMAIL',
       },
       {
         type: 'SECONDARY_EMAIL',
-        value: '210-209-0912',
+        value: worker.personalDetails.secondaryEmail,
         primary:
           worker.personalDetails.primaryContactType === 'SECONDARY_EMAIL',
       },
@@ -66,7 +66,7 @@ export const deserializeWorker = worker => {
       workPhone: worker.contacts
         ? _.filter(worker.contacts, ['type', 'WORK_PHONE'])[0].value
         : null,
-      primaryEmail: worker.contacts
+      email: worker.contacts
         ? _.filter(worker.contacts, ['type', 'EMAIL'])[0].value
         : null,
       secondaryEmail: worker.contacts
