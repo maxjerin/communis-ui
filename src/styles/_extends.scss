@@ -9,3 +9,7 @@
   border-top-right-radius: calc(0.25rem - 1px);
   border-bottom-right-radius: calc(0.25rem - 1px);
 }
+
+.modal-dialog {
+  max-width: 1000px;
+}

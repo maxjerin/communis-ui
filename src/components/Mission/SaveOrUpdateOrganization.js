@@ -13,14 +13,20 @@ import {
   ModalHeader,
 } from 'reactstrap';
 import SaveOrUpdateAddress from '../Address/SaveOrUpdateAddress';
+import AuditWidget from '../Common/AuditWidget';
 
-export default class EditMissionRegion extends CommunisComponent {
+export default class SaveOrUpdateOrganization extends CommunisComponent {
   state = {
     form: {
       name: null,
       address: null,
     },
   };
+
+  componentWillReceiveProps(nextProps) {
+    const organization = nextProps.organization ? nextProps.organization : {};
+    this.setState({ form: organization });
+  }
 
   handleAddressUpdate = address => {
     if (address) {
@@ -32,16 +38,7 @@ export default class EditMissionRegion extends CommunisComponent {
   };
 
   render() {
-    let organizations = this.props.mission.organizations.map(organization => (
-      <option key={organization.id} value={organization.id}>
-        {organization.name}
-      </option>
-    ));
-    let tiers = this.props.mission.tiers.map(tier => (
-      <option key={tier} value={tier}>
-        {tier}
-      </option>
-    ));
+    const organization = this.props.organization ? this.props.organization : {};
     return (
       <Modal
         isOpen={this.props.modal}
@@ -49,26 +46,12 @@ export default class EditMissionRegion extends CommunisComponent {
         className={this.props.className}
       >
         <ModalHeader toggle={this.props.toggle()}>
-          Create New Region
+          {this.state.form.id
+            ? 'Update Region ' + this.state.form.name
+            : 'Create New Region'}
         </ModalHeader>
         <ModalBody>
-          {this.handleException()}
           <Form>
-            <FormGroup row>
-              <Label for="tier" sm={2}>
-                Organization
-              </Label>
-              <Col sm={10}>
-                <Input
-                  type="select"
-                  name="organization"
-                  id="organization"
-                  onChange={e => this.updateFormState('organization', e)}
-                >
-                  {organizations}
-                </Input>
-              </Col>
-            </FormGroup>
             <FormGroup row>
               <Label for="missionRegionName" sm={2}>
                 Region Name
@@ -76,26 +59,12 @@ export default class EditMissionRegion extends CommunisComponent {
               <Col sm={10}>
                 <Input
                   type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Enter Region/Mission Station Name"
+                  name="organizationName"
+                  id="organizationName"
+                  placeholder="Enter Organization Name"
+                  value={this.state.form.name}
                   onChange={e => this.updateFormState('name', e)}
                 />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="tier" sm={2}>
-                Region Tier
-              </Label>
-              <Col sm={10}>
-                <Input
-                  type="select"
-                  name="regionType"
-                  id="tier"
-                  onChange={e => this.updateFormState('tier', e)}
-                >
-                  {tiers}
-                </Input>
               </Col>
             </FormGroup>
             <FormGroup row>
@@ -105,6 +74,12 @@ export default class EditMissionRegion extends CommunisComponent {
                   onUpdateCallback={this.handleAddressUpdate}
                   address={this.state.form.address}
                 />
+              </Col>
+            </FormGroup>
+            <FormGroup>
+              <Label for="missionRegionName" sm={2}></Label>
+              <Col sm={10}>
+                <AuditWidget entity={this.state.form} />
               </Col>
             </FormGroup>
           </Form>
