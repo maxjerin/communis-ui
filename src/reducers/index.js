@@ -5,6 +5,7 @@ import mission from './mission';
 import worker from './worker';
 import workerWorkflow from './workerWorkflow';
 import metaData from './metaData';
+import error from './error';
 
 const rootReducer = history =>
   combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = history =>
     mission,
     worker,
     workerWorkflow,
+    error,
   });
 
 export default rootReducer;

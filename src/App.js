@@ -8,6 +8,7 @@ import componentQueries from 'react-component-queries';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './styles/reduction.scss';
 import withAuthContext from './hocs/withAuthContext';
+import MissionOrganizationList from './pages/mission/MissionOrganizationList';
 
 const AlertPage = React.lazy(() => import('pages/AlertPage'));
 const AuthModalPage = React.lazy(() => import('pages/AuthModalPage'));
@@ -98,6 +99,11 @@ class App extends React.Component {
                   exact
                   path="/mission-region"
                   component={withAuthContext(MissionRegion)}
+                />
+                <Route
+                  exact
+                  path="/mission-organizations"
+                  component={withAuthContext(MissionOrganizationList)}
                 />
                 <Route
                   exact
