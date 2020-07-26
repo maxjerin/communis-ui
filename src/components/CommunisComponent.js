@@ -20,10 +20,8 @@ export default class CommunisComponent extends React.Component {
   };
 
   handleException() {
-    debugger;
     if (this.props.error && this.props.error.isError) {
       const { exception } = this.props.error;
-      debugger;
       switch (exception.status) {
         case 400:
           exception.errors.map(err => {
