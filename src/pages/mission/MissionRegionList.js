@@ -17,7 +17,7 @@ import {
   Table,
 } from 'reactstrap';
 import { FaGlobeAsia } from 'react-icons/fa';
-import EditMissionRegion from './../../components/Mission/NewRegion';
+import CreateOrUpdateRegion from '../../components/Mission/CreateOrUpdateRegion';
 import MissionRegionGrid from '../../components/Mission/MissionRegionsGrid';
 import NotificationSystem from 'react-notification-system';
 import { NOTIFICATION_SYSTEM_STYLE } from './../../utils/constants';
@@ -28,7 +28,7 @@ class MissionRegionList extends React.Component {
   };
 
   componentWillReceiveProps(nextProps, nextContext) {
-    if (nextProps.mission.newRegion) {
+    if (this.state.modal && nextProps.mission.newRegion) {
       setTimeout(() => {
         if (!this.notificationSystem) {
           return;
@@ -94,7 +94,7 @@ class MissionRegionList extends React.Component {
               </Col>
             </Row>
 
-            <EditMissionRegion
+            <CreateOrUpdateRegion
               modal={this.state.modal}
               toggle={this.toggle}
               className={this.props.className}
@@ -102,7 +102,7 @@ class MissionRegionList extends React.Component {
               mission={this.props.mission}
               error={this.props.error}
               handleSubmit={this.handleSubmit}
-            ></EditMissionRegion>
+            ></CreateOrUpdateRegion>
 
             <Row>
               <Col>
@@ -125,7 +125,6 @@ class MissionRegionList extends React.Component {
 }
 
 function mapStateToProps(store) {
-  debugger;
   return {
     mission: store.mission,
     router: store.router,

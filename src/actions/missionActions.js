@@ -183,7 +183,64 @@ export function createRegion(region) {
         });
       })
       .catch(err => {
-        debugger;
+        dispatch({
+          type: 'HTTP_ERROR',
+          payload: err.response.data,
+        });
+      });
+  };
+}
+
+export function createSubRegion(region) {
+  return function (dispatch) {
+    axios({
+      method: 'put',
+      url:
+        GLOBAL_CONSTANT.ENDPOINTS.MISSION_REGION +
+        '/' +
+        region.parentRegion +
+        '/subRegion',
+      data: region,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-Auth-Token': getLocalToken(),
+      },
+    })
+      .then(response => {
+        dispatch({
+          type: 'CREATE_SUBREGIONS_FULFILLED',
+          payload: response.data.data,
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: 'HTTP_ERROR',
+          payload: err.response.data,
+        });
+      });
+  };
+}
+
+export function updateRegion(region) {
+  return function (dispatch) {
+    axios({
+      method: 'post',
+      url: GLOBAL_CONSTANT.ENDPOINTS.MISSION_REGION,
+      data: region,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-Auth-Token': getLocalToken(),
+      },
+    })
+      .then(response => {
+        dispatch({
+          type: 'UPDATE_REGIONS_FULFILLED',
+          payload: response.data.data,
+        });
+      })
+      .catch(err => {
         dispatch({
           type: 'HTTP_ERROR',
           payload: err.response.data,

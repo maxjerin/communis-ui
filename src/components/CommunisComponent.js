@@ -1,5 +1,4 @@
 import React from 'react';
-import { UncontrolledAlert } from 'reactstrap';
 
 export default class CommunisComponent extends React.Component {
   constructor(props) {
@@ -18,25 +17,4 @@ export default class CommunisComponent extends React.Component {
       this.props.onUpdateCallback(form);
     }
   };
-
-  handleException() {
-    debugger;
-    if (this.props.error && this.props.error.isError) {
-      const { exception } = this.props.error;
-      debugger;
-      switch (exception.status) {
-        case 400:
-          exception.errors.map(err => {
-            return (
-              <UncontrolledAlert color="primary">
-                {err.objectName} : {err.field} {err.defaultMessage}
-              </UncontrolledAlert>
-            );
-          });
-          break;
-        default:
-        //return null;
-      }
-    }
-  }
 }

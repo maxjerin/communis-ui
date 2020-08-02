@@ -1,25 +1,14 @@
 import React from 'react';
-import {
-  Button,
-  Card,
-  CardBody,
-  CardTitle,
-  Col,
-  Form,
-  FormGroup,
-  Input,
-  Label,
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  Table,
-} from 'reactstrap';
+import { Button, Card, CardBody, Table } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import CardHeader from 'reactstrap/es/CardHeader';
 import { IoMdAdd } from 'react-icons/io';
-import { createRegion } from '../../actions/missionActions';
 import CommunisComponent from '../CommunisComponent';
+import CreateOrUpdateRegion from './CreateOrUpdateRegion';
+import { FaGlobeAsia } from 'react-icons/fa';
+import { NOTIFICATION_SYSTEM_STYLE } from '../../utils/constants';
+import NotificationSystem from 'react-notification-system';
+import { fetchSubRegions } from '../../actions/missionActions';
 
 class SubRegions extends CommunisComponent {
   state = {
@@ -28,13 +17,39 @@ class SubRegions extends CommunisComponent {
       missionRegionName: null,
       state: null,
       country: null,
+      subRegions: null,
     },
   };
 
-  handleSubmit = form => {
-    form.state = this.props.region.state;
-    form.country = this.props.region.country;
-    //this.props.dispatch(createRegion(form));
+  componentWillReceiveProps(nextProps, nextContext) {
+    debugger;
+    if (this.state.modal && nextProps.mission.newSubRegion) {
+      this.props.dispatch(fetchSubRegions(this.props.region.id));
+      setTimeout(() => {
+        if (!this.notificationSystem) {
+          return;
+        }
+
+        this.notificationSystem.addNotification({
+          title: <FaGlobeAsia />,
+          message: 'Sub Region added successfully!!',
+          level: 'info',
+        });
+      }, 1500);
+
+      this.setState({
+        modal: !this.state.modal,
+      });
+    }
+  }
+
+  onRegionSelect = region => {
+    let path = '/mission-region';
+    this.props.history.push({
+      pathname: path,
+      search: '?query=' + region.id,
+      state: { region: region },
+    });
   };
 
   toggle = modalType => () => {
@@ -43,7 +58,6 @@ class SubRegions extends CommunisComponent {
         modal: !this.state.modal,
       });
     }
-
     this.setState({
       [`modal_${modalType}`]: !this.state[`modal_${modalType}`],
     });
@@ -76,13 +90,13 @@ class SubRegions extends CommunisComponent {
             <tbody>
               {this.props.subRegionList.map(region => (
                 <tr>
-                  <th scope="row">{region.missionRegionName}</th>
+                  <th scope="row">{region.name}</th>
                   <td>{region.tier}</td>
                   <td>
                     <Button
                       color="link"
                       size="sm"
-                      onClick={this.onRegionSelect}
+                      onClick={() => this.onRegionSelect(region)}
                     >
                       view
                     </Button>
@@ -93,42 +107,23 @@ class SubRegions extends CommunisComponent {
           </Table>
         </CardBody>
 
-        <Modal
-          isOpen={this.state.modal}
+        <CreateOrUpdateRegion
+          parentRegion={this.props.region}
+          modal={this.state.modal}
           toggle={this.toggle}
           className={this.props.className}
-        >
-          <ModalHeader toggle={this.toggle()}>Create New Region</ModalHeader>
-          <ModalBody>
-            <Form>
-              <FormGroup row>
-                <Label for="missionRegionName" sm={2}>
-                  Region Name
-                </Label>
-                <Col sm={10}>
-                  <Input
-                    type="text"
-                    name="missionRegionName"
-                    id="missionRegionName"
-                    placeholder="Enter Region/Mission Station Name"
-                    onChange={e => this.updateFormState('missionRegionName', e)}
-                  />
-                </Col>
-              </FormGroup>
-            </Form>
-          </ModalBody>
-          <ModalFooter>
-            <Button
-              color="primary"
-              onClick={() => this.handleSubmit(this.state.form)}
-            >
-              Save
-            </Button>
-            <Button color="secondary" onClick={this.toggle()}>
-              Cancel
-            </Button>
-          </ModalFooter>
-        </Modal>
+          metaData={this.props.metaData}
+          mission={this.props.mission}
+          error={this.props.error}
+          handleSubmit={this.props.handleSubRegionSubmit}
+        ></CreateOrUpdateRegion>
+        <NotificationSystem
+          dismissible={false}
+          ref={notificationSystem =>
+            (this.notificationSystem = notificationSystem)
+          }
+          style={NOTIFICATION_SYSTEM_STYLE}
+        />
       </Card>
     );
   }

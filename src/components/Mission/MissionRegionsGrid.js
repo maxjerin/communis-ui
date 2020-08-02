@@ -3,12 +3,12 @@ import { Button, Table } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 
 class MissionRegionGrid extends React.Component {
-  onRegionSelect = mission => {
+  onRegionSelect = region => {
     let path = '/mission-region';
     this.props.history.push({
       pathname: path,
-      search: '?query=abc',
-      state: { region: mission },
+      search: '?query=' + region.id,
+      state: { region: region },
     });
   };
 

@@ -103,7 +103,6 @@ class App extends React.Component {
                   path="/mission-organizations"
                   component={withAuthContext(MissionOrganizationList)}
                 />
-                >
               </React.Suspense>
             </MainLayout>
             <Redirect to="/" />
