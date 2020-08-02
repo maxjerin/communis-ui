@@ -125,7 +125,6 @@ class MissionRegionList extends React.Component {
 }
 
 function mapStateToProps(store) {
-  debugger;
   return {
     mission: store.mission,
     router: store.router,

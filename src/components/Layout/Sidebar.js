@@ -43,10 +43,16 @@ const sidebarBackground = {
   backgroundRepeat: 'no-repeat',
 };
 
-const missionItems = [
+const navItems = [
   {
     to: '/mission-regions',
     name: 'Regions',
+    exact: false,
+    Icon: MdRadioButtonChecked,
+  },
+  {
+    to: '/workers',
+    name: 'Workers',
     exact: false,
     Icon: MdRadioButtonChecked,
   },
@@ -123,7 +129,7 @@ class Sidebar extends React.Component {
               </BSNavLink>
             </NavItem>
             <Collapse isOpen={this.state.isOpenComponents}>
-              {missionItems.map(({ to, name, exact, Icon }, index) => (
+              {navItems.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}

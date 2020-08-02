@@ -183,7 +183,6 @@ export function createRegion(region) {
         });
       })
       .catch(err => {
-        debugger;
         dispatch({
           type: 'HTTP_ERROR',
           payload: err.response.data,
