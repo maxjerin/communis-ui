@@ -73,14 +73,6 @@ const reducer = (state = initialState, action) => {
         regions: action.payload,
       };
     }
-    case 'FETCH_REGIONS_REJECTED': {
-      return {
-        ...state,
-        isError: true,
-        exception: action.payload,
-        regions: [],
-      };
-    }
     case 'FETCH_SUB_REGIONS_FULFILLED': {
       let subRegions = state.subRegions;
       subRegions[action.regionId] = action.payload;
@@ -89,13 +81,6 @@ const reducer = (state = initialState, action) => {
         isError: false,
         exception: null,
         subRegions,
-      };
-    }
-    case 'FETCH_SUB_REGIONS_REJECTED': {
-      return {
-        ...state,
-        isError: true,
-        exception: action.payload,
       };
     }
     case 'FETCH_REGIONS_TIERS_FULFILLED': {
@@ -125,11 +110,29 @@ const reducer = (state = initialState, action) => {
         newRegion: true,
       };
     }
-    case 'CREATE_REGIONS_REJECTED': {
+    case 'CREATE_SUBREGIONS_FULFILLED': {
+      let regions = state.regions;
+      regions.push(action.payload);
       return {
         ...state,
-        isError: true,
-        exception: action.payload,
+        isError: false,
+        exception: null,
+        regions: regions,
+        newSubRegion: true,
+      };
+    }
+    case 'UPDATE_REGIONS_FULFILLED': {
+      let regions = state.regions;
+      regions = regions.filter(function (el) {
+        return el.id != action.payload.id;
+      });
+      regions.push(action.payload);
+      return {
+        ...state,
+        isError: false,
+        exception: null,
+        regions: regions,
+        updatedRegion: true,
       };
     }
     default:
