@@ -13,14 +13,22 @@ import {
   ModalHeader,
 } from 'reactstrap';
 import SaveOrUpdateAddress from '../Address/SaveOrUpdateAddress';
+import Error from '../Common/Error';
 
-export default class EditMissionRegion extends CommunisComponent {
-  state = {
-    form: {
-      name: null,
-      address: null,
-    },
-  };
+export default class CreateOrUpdateRegion extends CommunisComponent {
+  constructor(props) {
+    super(props);
+    let region = {};
+    if (this.props.parentRegion) {
+      region = { ...this.props.parentRegion };
+      region.id = null;
+      region.subRegions = null;
+      region.name = '';
+    }
+    this.state = {
+      form: region,
+    };
+  }
 
   handleAddressUpdate = address => {
     if (address) {
@@ -31,13 +39,25 @@ export default class EditMissionRegion extends CommunisComponent {
     }
   };
 
+  createNewRegion = () => {
+    let form = this.state.form;
+    if (!form.organization) {
+      const org = this.props.mission.organizations[0];
+      form.organization = org.id;
+    }
+    this.props.handleSubmit(form);
+  };
+
   render() {
-    let organizations = this.props.mission.organizations.map(organization => (
-      <option key={organization.id} value={organization.id}>
-        {organization.name}
-      </option>
-    ));
-    let tiers = this.props.mission.tiers.map(tier => (
+    const isReadOnly = this.props.parentRegion ? true : false;
+    let organizations = this.props.mission.organizations.map(
+      (organization, idx) => (
+        <option id={organization.id} value={organization.id}>
+          {organization.name}
+        </option>
+      ),
+    );
+    let tiers = this.props.mission.tiers.map((tier, idx) => (
       <option key={tier} value={tier}>
         {tier}
       </option>
@@ -52,7 +72,7 @@ export default class EditMissionRegion extends CommunisComponent {
           Create New Region
         </ModalHeader>
         <ModalBody>
-          {this.handleException()}
+          <Error error={this.props.error} />
           <Form>
             <FormGroup row>
               <Label for="tier" sm={2}>
@@ -60,9 +80,15 @@ export default class EditMissionRegion extends CommunisComponent {
               </Label>
               <Col sm={10}>
                 <Input
+                  disabled={isReadOnly}
                   type="select"
                   name="organization"
                   id="organization"
+                  value={
+                    this.state.form
+                      ? this.state.form.organization
+                      : organizations[0]
+                  }
                   onChange={e => this.updateFormState('organization', e)}
                 >
                   {organizations}
@@ -78,6 +104,7 @@ export default class EditMissionRegion extends CommunisComponent {
                   type="text"
                   name="name"
                   id="name"
+                  value={this.state.form.name}
                   placeholder="Enter Region/Mission Station Name"
                   onChange={e => this.updateFormState('name', e)}
                 />
@@ -92,6 +119,7 @@ export default class EditMissionRegion extends CommunisComponent {
                   type="select"
                   name="regionType"
                   id="tier"
+                  value={this.state.form.tier}
                   onChange={e => this.updateFormState('tier', e)}
                 >
                   {tiers}
@@ -110,10 +138,7 @@ export default class EditMissionRegion extends CommunisComponent {
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button
-            color="primary"
-            onClick={() => this.props.handleSubmit(this.state.form)}
-          >
+          <Button color="primary" onClick={() => this.createNewRegion()}>
             Save
           </Button>
           <Button color="secondary" onClick={this.props.toggle()}>

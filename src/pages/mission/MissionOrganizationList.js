@@ -19,7 +19,7 @@ import {
   Table,
 } from 'reactstrap';
 import { FaGlobeAsia } from 'react-icons/fa';
-import EditMissionRegion from './../../components/Mission/NewRegion';
+import CreateOrUpdateRegion from '../../components/Mission/CreateOrUpdateRegion';
 import MissionRegionGrid from '../../components/Mission/MissionRegionsGrid';
 import NotificationSystem from 'react-notification-system';
 import { NOTIFICATION_SYSTEM_STYLE } from './../../utils/constants';
