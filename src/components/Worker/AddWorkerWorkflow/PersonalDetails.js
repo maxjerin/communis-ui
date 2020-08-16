@@ -21,7 +21,8 @@ class PersonalDetails extends React.Component {
     const { details, previous, next } = this.props;
 
     return (
-      <Page title="Forms" breadcrumbs={[{ name: 'Forms', active: true }]}>
+      //<Page title="Personal Details & Contact Information" breadcrumbs={[{ name: '', active: false }]>
+      <Page>
         <Row>
           <Col xl={6} md={12} lg={12}>
             <Row>
@@ -196,15 +197,17 @@ class PersonalDetails extends React.Component {
                   </Form>
                 </CardBody>
               </Card>
-              <Row>
-                <Col></Col>
-              </Row>
-              <Form>
-                <Row>
-                  <Col>{previous}</Col>
-                  <Col>{next}</Col>
-                </Row>
-              </Form>
+            </Row>
+          </Col>
+        </Row>
+        <Row>
+          <Col></Col>
+          <Col xl={6} md={12} lg={12}>
+            <Row>
+              <Col />
+              <Col>
+                {previous} {next}
+              </Col>
             </Row>
           </Col>
         </Row>
