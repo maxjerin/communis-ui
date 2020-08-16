@@ -99,6 +99,12 @@ const reducer = (state = initialState, action) => {
         },
       };
     }
+    case 'SET_SELECTED_WORKER': {
+      return {
+        ...state,
+        worker: payload,
+      };
+    }
     case 'RESET_WORKER_WORKFLOW': {
       return initialState;
     }

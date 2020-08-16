@@ -14,36 +14,38 @@ import {
   addPersonalDetails as dispatchAddPersonalDetails,
   addTestimony as dispatchAddTestimony,
   addWorker as dispatchAddWorker,
+  setSelectedWorker as dispatchSetSelectedWorker,
 } from '../../actions/workerActions';
 import { deserializeWorker } from '../../transformers/workerTransfomer';
-import { initialState } from '../../reducers/workerWorkflow';
 
 class WorkerProfile extends React.Component {
   state = {
     selectedTab: 'personalDetails',
-    selectedWorker: initialState.worker,
+    originalWorkerProfile: null,
   };
 
   componentDidMount() {
     const { workers } = this.props;
     const workerId = this.props.match.params.id;
     const worker = _.filter(workers, ['id', workerId]);
-    if (worker && worker.length) {
-      this.setState({ selectedWorker: deserializeWorker(worker[0]) });
-    }
+    this.props.setSelectedWorker(deserializeWorker(worker[0]));
+    this.setState({ originalWorkerProfile: deserializeWorker(worker[0]) });
   }
 
   render() {
-    const { selectedTab, selectedWorker } = this.state;
+    const { selectedTab, originalWorkerProfile } = this.state;
     const {
       addPersonalDetails,
       addFamily,
       addTestimony,
       addAddress,
       countries,
+      selectedWorker,
     } = this.props;
-    const isCurrentWorkflowPage = selectedWorkflowPage =>
-      selectedWorkflowPage === selectedTab;
+
+    const updateEnabled = _.isEqual(originalWorkerProfile, selectedWorker);
+
+    const isCurrentTab = currentTab => currentTab === selectedTab;
 
     return (
       <Row>
@@ -79,21 +81,21 @@ class WorkerProfile extends React.Component {
             </Row>
             <Row>
               <Col>
-                {isCurrentWorkflowPage('family') ? (
+                {isCurrentTab('family') ? (
                   <Family
                     persist={addFamily}
                     showNavigation={false}
                     details={selectedWorker.family}
                   />
                 ) : null}
-                {isCurrentWorkflowPage('personalDetails') ? (
+                {isCurrentTab('personalDetails') ? (
                   <PersonalDetails
                     persist={addPersonalDetails}
                     showNavigation={false}
                     details={selectedWorker.personalDetails}
                   />
                 ) : null}
-                {isCurrentWorkflowPage('address') ? (
+                {isCurrentTab('address') ? (
                   <Address
                     persist={addAddress}
                     showNavigation={false}
@@ -101,7 +103,7 @@ class WorkerProfile extends React.Component {
                     details={selectedWorker.address}
                   />
                 ) : null}
-                {isCurrentWorkflowPage('testimony') ? (
+                {isCurrentTab('testimony') ? (
                   <Testimony
                     persist={addTestimony}
                     showNavigation={false}
@@ -109,6 +111,9 @@ class WorkerProfile extends React.Component {
                   />
                 ) : null}
               </Col>
+            </Row>
+            <Row>
+              <Button disabled={updateEnabled}>Update</Button>
             </Row>
           </Card>
         </Col>
@@ -121,12 +126,15 @@ function mapStateToProps(store) {
   return {
     router: store.router,
     workers: store.worker.workers,
+    selectedWorker: store.workerWorkflow.worker,
     countries: store.metaData.countries,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    setSelectedWorker: selectedWorker =>
+      dispatch(dispatchSetSelectedWorker(selectedWorker)),
     addPersonalDetails: personalDetails =>
       dispatch(dispatchAddPersonalDetails(personalDetails)),
     addAddress: address => dispatch(dispatchAddAddress(address)),

@@ -86,6 +86,13 @@ export function setCurrentWorkflowPage(workerWorkflowPage) {
   };
 }
 
+export function setSelectedWorker(selectedWorker) {
+  return {
+    type: 'SET_SELECTED_WORKER',
+    payload: selectedWorker,
+  };
+}
+
 export function resetWorkerWorkflow() {
   return {
     type: 'RESET_WORKER_WORKFLOW',
@@ -117,14 +124,5 @@ export function addTestimony(testimony) {
   return {
     type: 'ADD_TESTIMONY',
     payload: testimony,
-  };
-}
-
-export function selectWorker(worker) {
-  return dispatch => {
-    dispatch({
-      type: 'SELECT_WORKER',
-      payload: deserializeWorker(worker),
-    });
   };
 }
