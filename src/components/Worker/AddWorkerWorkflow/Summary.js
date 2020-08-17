@@ -28,7 +28,7 @@ class Summary extends React.Component {
       gender,
       cellPhone,
       homePhone,
-      primaryEmail,
+      email,
       secondaryEmail,
       primaryContactType,
     } = personalDetails;
@@ -140,7 +140,7 @@ class Summary extends React.Component {
                       <Label for="primaryEmail">Primary Email:</Label>
                       <Col>
                         <Label name="primaryEmail" id="primaryEmail">
-                          {primaryEmail}
+                          {email}
                         </Label>
                       </Col>
                     </FormGroup>
