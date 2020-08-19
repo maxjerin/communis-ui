@@ -1,3 +1,4 @@
+import Page from 'components/Page';
 import React from 'react';
 import {
   Button,
@@ -6,6 +7,7 @@ import {
   CardHeader,
   Col,
   FormGroup,
+  Form,
   Input,
   Label,
   Row,
@@ -20,35 +22,38 @@ class Testimony extends React.Component {
     const { details, previous, next } = this.props;
 
     return (
-      <Row>
-        <Col xl={12} md={12} lg={12}>
-          <Row>
-            <Card>
-              <CardHeader>Testimony</CardHeader>
-              <CardBody>
-                <Row>
-                  <Col>
+      <Page>
+        <Row>
+          <Col>
+            <Row>
+              <Card>
+                <CardHeader>Testimony</CardHeader>
+                <CardBody>
+                  <Form>
                     <FormGroup>
-                      <Label for="testimony">Testimony</Label>
                       <Input
                         onChange={e => this.persistField(e, 'testimony')}
                         type="textarea"
                         name="testimony"
                         id="testimony"
+                        cols="50"
+                        rows="20"
+                        placeholder="Please enter the testimony here"
                         value={details}
                       />
                     </FormGroup>
-                  </Col>
-                </Row>
-              </CardBody>
-            </Card>
-          </Row>
-          <Row>
-            <Col>{previous}</Col>
-            <Col>{next}</Col>
-          </Row>
-        </Col>
-      </Row>
+                  </Form>
+                </CardBody>
+              </Card>
+            </Row>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            {previous} {next}
+          </Col>
+        </Row>
+      </Page>
     );
   }
 }

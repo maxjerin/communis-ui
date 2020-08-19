@@ -1,3 +1,4 @@
+import Page from 'components/Page';
 import React from 'react';
 import {
   Card,
@@ -7,6 +8,7 @@ import {
   FormGroup,
   Label,
   Row,
+  Input,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 
@@ -26,7 +28,7 @@ class Summary extends React.Component {
       gender,
       cellPhone,
       homePhone,
-      primaryEmail,
+      email,
       secondaryEmail,
       primaryContactType,
     } = personalDetails;
@@ -41,38 +43,9 @@ class Summary extends React.Component {
     const { familyName, relationshipType } = family;
 
     return (
-      <Row>
-        <Col xl={6} md={12} lg={12}>
-          <Row>
-            {hasFamily && (
-              <Card>
-                <CardHeader>Family</CardHeader>
-                <CardBody>
-                  <Row>
-                    <Col>
-                      <FormGroup row>
-                        <Label for="familyName">Family Name:</Label>
-                        <Col>
-                          <Label name="familyName" id="familyName">
-                            {familyName}
-                          </Label>
-                        </Col>
-                      </FormGroup>
-                    </Col>
-                    <Col>
-                      <FormGroup row>
-                        <Label for="relationshipType">Relationship Type:</Label>
-                        <Col>
-                          <Label name="relationshipType" id="relationshipType">
-                            {relationshipType}
-                          </Label>
-                        </Col>
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                </CardBody>
-              </Card>
-            )}
+      <Page>
+        <Row>
+          <Col xl={6} md={12} lg={12}>
             <Card>
               <CardHeader>Personal Details</CardHeader>
               <CardBody>
@@ -132,6 +105,10 @@ class Summary extends React.Component {
                 </Row>
               </CardBody>
             </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col xl={6} md={12} lg={12}>
             <Card>
               <CardHeader>Contact</CardHeader>
               <CardBody>
@@ -163,7 +140,7 @@ class Summary extends React.Component {
                       <Label for="primaryEmail">Primary Email:</Label>
                       <Col>
                         <Label name="primaryEmail" id="primaryEmail">
-                          {primaryEmail}
+                          {email}
                         </Label>
                       </Col>
                     </FormGroup>
@@ -198,6 +175,10 @@ class Summary extends React.Component {
                 </Row>
               </CardBody>
             </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col xl={6} md={12} lg={12}>
             <Card>
               <CardHeader>Address</CardHeader>
               <CardBody>
@@ -269,30 +250,77 @@ class Summary extends React.Component {
                 </Row>
               </CardBody>
             </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col xl={6} md={12} lg={12}>
             <Card>
               <CardHeader>Testimony</CardHeader>
               <CardBody>
                 <Row>
                   <Col>
                     <FormGroup row>
-                      <Label for="testimony">Testimony:</Label>
                       <Col>
-                        <Label name="testimony" id="testimony">
-                          {testimony}
-                        </Label>
+                        <Input
+                          type="textarea"
+                          name="testimony"
+                          rows="20"
+                          disabled
+                          placeholder={testimony}
+                        />
                       </Col>
                     </FormGroup>
                   </Col>
                 </Row>
               </CardBody>
             </Card>
-          </Row>
-          <Row>
-            <Col>{previous}</Col>
-            <Col>{next}</Col>
-          </Row>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+        <Row>
+          <Col xl={6} md={12} lg={12}>
+            <Row>
+              {hasFamily && (
+                <Card>
+                  <CardHeader>Family</CardHeader>
+                  <CardBody>
+                    <Row>
+                      <Col>
+                        <FormGroup row>
+                          <Label for="familyName">Family Name:</Label>
+                          <Col>
+                            <Label name="familyName" id="familyName">
+                              {familyName}
+                            </Label>
+                          </Col>
+                        </FormGroup>
+                      </Col>
+                      <Col>
+                        <FormGroup row>
+                          <Label for="relationshipType">
+                            Relationship Type:
+                          </Label>
+                          <Col>
+                            <Label
+                              name="relationshipType"
+                              id="relationshipType"
+                            >
+                              {relationshipType}
+                            </Label>
+                          </Col>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                  </CardBody>
+                </Card>
+              )}
+            </Row>
+            <Row>
+              <Col>{previous}</Col>
+              <Col>{next}</Col>
+            </Row>
+          </Col>
+        </Row>
+      </Page>
     );
   }
 }
