@@ -8,7 +8,6 @@ import {
   FormGroup,
   Input,
   Label,
-  Container,
   Row,
   Form,
 } from 'reactstrap';
@@ -20,6 +19,10 @@ class PersonalDetails extends React.Component {
 
   render() {
     const { details, previous, next } = this.props;
+
+    if (!details.primaryContactType) {
+      details.primaryContactType = 'Cell Phone';
+    }
 
     return (
       //<Page title="Personal Details & Contact Information" breadcrumbs={[{ name: '', active: false }]>
