@@ -47,14 +47,14 @@ export default class SaveOrUpdateOrganization extends CommunisComponent {
       >
         <ModalHeader toggle={this.props.toggle()}>
           {this.state.form.id
-            ? 'Update Region ' + this.state.form.name
-            : 'Create New Region'}
+            ? 'Update Organization - ' + this.state.form.name
+            : 'Create New Organization'}
         </ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup row>
               <Label for="missionRegionName" sm={2}>
-                Region Name
+                Name
               </Label>
               <Col sm={10}>
                 <Input
