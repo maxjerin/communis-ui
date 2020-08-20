@@ -5,6 +5,8 @@ import {
   createRegion,
   fetchRegionTiers,
   fetchOrganizations,
+  createOrganization,
+  updateOrganization,
 } from './../../actions/missionActions';
 import {
   Button,
@@ -21,14 +23,17 @@ import CreateOrUpdateRegion from '../../components/Mission/CreateOrUpdateRegion'
 import MissionRegionGrid from '../../components/Mission/MissionRegionsGrid';
 import NotificationSystem from 'react-notification-system';
 import { NOTIFICATION_SYSTEM_STYLE } from './../../utils/constants';
+import MissionOrganizationsGrid from '../../components/Mission/MissionOrganizationsGrid';
+import SaveOrUpdateOrganization from '../../components/Mission/SaveOrUpdateOrganization';
 
-class MissionRegionList extends React.Component {
+class MissionOrganizationList extends React.Component {
   state = {
     modal: false,
+    organization: null,
   };
 
   componentWillReceiveProps(nextProps, nextContext) {
-    if (this.state.modal && nextProps.mission.newRegion) {
+    if (nextProps.mission.organizationUpdated) {
       setTimeout(() => {
         if (!this.notificationSystem) {
           return;
@@ -36,7 +41,7 @@ class MissionRegionList extends React.Component {
 
         this.notificationSystem.addNotification({
           title: <FaGlobeAsia />,
-          message: 'Region added successfully!!',
+          message: 'Organization added successfully!!',
           level: 'info',
         });
       }, 1500);
@@ -48,24 +53,23 @@ class MissionRegionList extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchRegionTiers());
-    const { organizations, regions } = this.props.mission;
-    if (regions && regions.length == 0) {
-      this.props.dispatch(fetchRegions());
-    }
+    const { organizations } = this.props.mission;
     if (organizations && organizations.length == 0) {
       this.props.dispatch(fetchOrganizations());
     }
   }
 
   handleSubmit = form => {
-    this.props.dispatch(createRegion(form));
+    form.id
+      ? this.props.dispatch(updateOrganization(form))
+      : this.props.dispatch(createOrganization(form));
   };
-  '';
+
   toggle = modalType => () => {
     if (!modalType) {
       return this.setState({
         modal: !this.state.modal,
+        organization: {},
       });
     }
 
@@ -74,8 +78,12 @@ class MissionRegionList extends React.Component {
     });
   };
 
+  onOrganizationSelect = organization => {
+    this.setState({ ...this.state, organization, modal: !this.state.modal });
+  };
+
   render() {
-    const { regions } = this.props.mission;
+    const { organizations } = this.props.mission;
 
     return (
       <Row>
@@ -84,29 +92,32 @@ class MissionRegionList extends React.Component {
             <Row>
               <Col md={9}>
                 <h3>
-                  <FaGlobeAsia /> Mission Regions
+                  <FaGlobeAsia /> Mission Organizations
                 </h3>
               </Col>
               <Col md={{ size: 2, offset: 1 }}>
                 <ButtonGroup className="mr-3 mb-3">
-                  <Button onClick={this.toggle()}>New Region</Button>
+                  <Button onClick={this.toggle()}>New Organization</Button>
                 </ButtonGroup>
               </Col>
             </Row>
 
-            <CreateOrUpdateRegion
+            <SaveOrUpdateOrganization
               modal={this.state.modal}
               toggle={this.toggle}
               className={this.props.className}
               metaData={this.props.metaData}
               mission={this.props.mission}
-              error={this.props.error}
               handleSubmit={this.handleSubmit}
-            ></CreateOrUpdateRegion>
+              organization={this.state.organization}
+            ></SaveOrUpdateOrganization>
 
             <Row>
               <Col>
-                <MissionRegionGrid regions={regions} />
+                <MissionOrganizationsGrid
+                  organizations={organizations}
+                  onOrganizationSelect={this.onOrganizationSelect.bind(this)}
+                />
               </Col>
             </Row>
 
@@ -129,8 +140,7 @@ function mapStateToProps(store) {
     mission: store.mission,
     router: store.router,
     metaData: store.metaData,
-    error: store.error,
   };
 }
 
-export default connect(mapStateToProps)(MissionRegionList);
+export default connect(mapStateToProps)(MissionOrganizationList);

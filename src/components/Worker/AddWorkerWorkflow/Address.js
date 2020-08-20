@@ -1,4 +1,5 @@
 import React from 'react';
+import Page from 'components/Page';
 import {
   Button,
   Card,
@@ -6,6 +7,7 @@ import {
   CardHeader,
   Col,
   FormGroup,
+  Form,
   Input,
   Label,
   Row,
@@ -20,42 +22,36 @@ class Address extends React.Component {
     const { countries, details, showNavigation, previous, next } = this.props;
 
     return (
-      <Row>
-        <Col xl={6} md={12} lg={12}>
-          <Row>
-            <Card>
-              <CardHeader>Addresses</CardHeader>
-              <CardBody>
-                <Row>
-                  <Col>
+      <Page>
+        <Row>
+          <Col xl={6} md={12} lg={12}>
+            <Row>
+              <Card>
+                <CardHeader>Addresses</CardHeader>
+                <CardBody>
+                  <Form>
                     <FormGroup>
                       <Label for="addressLine1">Address Line 1</Label>
                       <Input
                         type="text"
                         name="addressLine1"
                         id="addressLine1"
+                        placeholder="Required"
                         onChange={e => this.persistField(e, 'addressLine1')}
                         value={details.addressLine1}
                       />
                     </FormGroup>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
                     <FormGroup>
                       <Label for="addressLine2">Address Line 2</Label>
                       <Input
                         type="text"
                         name="addressLine2"
                         id="addressLine2"
+                        placeholder="Optional"
                         onChange={e => this.persistField(e, 'addressLine2')}
                         value={details.addressLine2}
                       />
                     </FormGroup>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
                     <FormGroup>
                       <Label for="city">City</Label>
                       <Input
@@ -63,37 +59,38 @@ class Address extends React.Component {
                         type="text"
                         name="city"
                         id="city"
+                        placeholder="Required"
                         value={details.city}
                       />
                     </FormGroup>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <FormGroup>
-                      <Label for="state">State</Label>
-                      <Input
-                        onChange={e => this.persistField(e, 'state')}
-                        type="text"
-                        name="state"
-                        id="state"
-                        value={details.state}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col>
-                    <FormGroup>
-                      <Label for="areaCode">Area Code</Label>
-                      <Input
-                        onChange={e => this.persistField(e, 'areaCode')}
-                        type="text"
-                        name="areaCode"
-                        id="areaCode"
-                        value={details.areaCode}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col>
+                    <Row>
+                      <Col>
+                        <FormGroup>
+                          <Label for="state">State</Label>
+                          <Input
+                            onChange={e => this.persistField(e, 'state')}
+                            type="text"
+                            name="state"
+                            id="state"
+                            placeholder="Required"
+                            value={details.state}
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col>
+                        <FormGroup>
+                          <Label for="areaCode">Area Code</Label>
+                          <Input
+                            onChange={e => this.persistField(e, 'areaCode')}
+                            type="text"
+                            name="areaCode"
+                            id="areaCode"
+                            placeholder="Required"
+                            value={details.areaCode}
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
                     <FormGroup>
                       <Label for="country">Country</Label>
                       <Input
@@ -111,19 +108,20 @@ class Address extends React.Component {
                         ))}
                       </Input>
                     </FormGroup>
-                  </Col>
-                </Row>
-              </CardBody>
-            </Card>
-          </Row>
-          {showNavigation ? (
-            <Row>
-              <Col>{previous}</Col>
-              <Col>{next}</Col>
+                  </Form>
+                </CardBody>
+              </Card>
             </Row>
-          ) : null}
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+        {showNavigation ? (
+          <Row>
+            <Col>
+              {previous} {next}
+            </Col>
+          </Row>
+        ) : null}
+      </Page>
     );
   }
 }
