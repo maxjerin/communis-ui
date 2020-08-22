@@ -45,12 +45,17 @@ export const serializeWorker = worker => {
           worker.personalDetails.primaryContactType === 'SECONDARY_EMAIL',
       },
     ],
+    family: {
+      familyName: worker.family.familyName,
+      relationshipType: worker.family.relationshipType,
+    },
     testimony: worker.testimony,
   };
 };
 
 export const deserializeWorker = worker => {
   return {
+    id: worker.id,
     personalDetails: {
       firstName: worker.firstName,
       middleName: worker.middleName,
@@ -85,7 +90,7 @@ export const deserializeWorker = worker => {
       country: worker.address[0].country,
     },
     family: {
-      familyName: worker.family,
+      familyName: null,
       relationshipType: null,
     },
     testimony: worker.testimony,

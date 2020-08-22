@@ -13,7 +13,7 @@ import {
   addFamily as dispatchAddFamily,
   addPersonalDetails as dispatchAddPersonalDetails,
   addTestimony as dispatchAddTestimony,
-  addWorker as dispatchAddWorker,
+  updateWorker as dispatchUpdateWorker,
   setSelectedWorker as dispatchSetSelectedWorker,
 } from '../../actions/workerActions';
 import { deserializeWorker } from '../../transformers/workerTransfomer';
@@ -41,6 +41,7 @@ class WorkerProfile extends React.Component {
       addAddress,
       countries,
       selectedWorker,
+      updateWorker,
     } = this.props;
 
     const updateEnabled = _.isEqual(originalWorkerProfile, selectedWorker);
@@ -113,7 +114,9 @@ class WorkerProfile extends React.Component {
               </Col>
             </Row>
             <Row>
-              <Button disabled={updateEnabled}>Update</Button>
+              <Button disabled={updateEnabled} onClick={updateWorker}>
+                Update
+              </Button>
             </Row>
           </Card>
         </Col>
@@ -140,7 +143,7 @@ function mapDispatchToProps(dispatch) {
     addAddress: address => dispatch(dispatchAddAddress(address)),
     addFamily: family => dispatch(dispatchAddFamily(family)),
     addTestimony: testimony => dispatch(dispatchAddTestimony(testimony)),
-    addWorker: worker => dispatch(dispatchAddWorker(worker)),
+    updateWorker: () => dispatch(dispatchUpdateWorker()),
   };
 }
 

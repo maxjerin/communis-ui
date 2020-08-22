@@ -69,6 +69,23 @@ export function addWorker(worker) {
   };
 }
 
+export function updateWorker() {
+  return function (dispatch, getState) {
+    const state = getState();
+    const worker = state.workerWorkflow.worker;
+    axios({
+      method: 'PUT',
+      url: `${GLOBAL_CONSTANT.ENDPOINTS.WORKERS}/${worker.id}`,
+      data: serializeWorker(worker),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-Auth-Token': getLocalToken(),
+      },
+    });
+  };
+}
+
 export function setWorkflowState(hasFamilyPage) {
   const states = hasFamilyPage
     ? WORKER_WITH_FAMILY_WORKFLOW_STATES
