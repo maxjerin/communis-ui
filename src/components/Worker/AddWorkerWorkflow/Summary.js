@@ -315,8 +315,9 @@ class Summary extends React.Component {
               )}
             </Row>
             <Row>
-              <Col>{previous}</Col>
-              <Col>{next}</Col>
+              <Col>
+                {previous} {next}
+              </Col>
             </Row>
           </Col>
         </Row>

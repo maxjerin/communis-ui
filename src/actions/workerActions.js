@@ -5,7 +5,10 @@ import {
   WORKER_WORKFLOW_STATES,
 } from '../utils/constants';
 import { getLocalToken } from './../utils/jwtTokenUtils';
-import { serializeWorker } from '../transformers/workerTransfomer';
+import {
+  deserializeWorker,
+  serializeWorker,
+} from '../transformers/workerTransfomer';
 
 export function fetchWorkers() {
   return function (dispatch) {
@@ -66,6 +69,23 @@ export function addWorker(worker) {
   };
 }
 
+export function updateWorker() {
+  return function (dispatch, getState) {
+    const state = getState();
+    const worker = state.workerWorkflow.worker;
+    axios({
+      method: 'PUT',
+      url: `${GLOBAL_CONSTANT.ENDPOINTS.WORKERS}/${worker.id}`,
+      data: serializeWorker(worker),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-Auth-Token': getLocalToken(),
+      },
+    });
+  };
+}
+
 export function setWorkflowState(hasFamilyPage) {
   const states = hasFamilyPage
     ? WORKER_WITH_FAMILY_WORKFLOW_STATES
@@ -80,6 +100,13 @@ export function setCurrentWorkflowPage(workerWorkflowPage) {
   return {
     type: 'SET_CURRENT_WORKFLOW_PAGE',
     payload: workerWorkflowPage,
+  };
+}
+
+export function setSelectedWorker(selectedWorker) {
+  return {
+    type: 'SET_SELECTED_WORKER',
+    payload: selectedWorker,
   };
 }
 

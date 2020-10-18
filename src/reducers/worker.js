@@ -1,5 +1,8 @@
+import { initialState as workerWorkflowInitialState } from './workerWorkflow';
+
 const initialState = {
   workers: [],
+  selectedWorker: workerWorkflowInitialState.worker,
   isError: false,
   exception: null,
 };
@@ -37,6 +40,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         isError: true,
         exception: action.payload,
+      };
+    }
+    case 'SELECT_WORKER': {
+      return {
+        ...state,
+        selectedWorker: action.payload,
       };
     }
     default:

@@ -5,11 +5,8 @@ import { generateKey } from '../../utils/components';
 
 class WorkerProfileGrid extends React.Component {
   onViewWorkerProfile = worker => {
-    let path = '/worker-profile';
     this.props.history.push({
-      pathname: path,
-      search: '?query=abc',
-      state: { worker: worker },
+      pathname: `/worker-profile/${worker.id}`,
     });
   };
 
@@ -19,10 +16,8 @@ class WorkerProfileGrid extends React.Component {
         <thead>
           <tr>
             <th scope="col">First Name</th>
-            <th scope="col">Middle Name</th>
             <th scope="col">Last Name</th>
             <th scope="col">Date of Birth</th>
-            <th scope="col">Address</th>
             <th scope="col">Gender</th>
             <th scope="col">Details</th>
           </tr>
@@ -31,7 +26,6 @@ class WorkerProfileGrid extends React.Component {
           {this.props.workers.map((worker, index) => (
             <tr key={generateKey(index)}>
               <td key={generateKey(worker.firstName)}>{worker.firstName}</td>
-              <td key={generateKey(worker.middleName)}>{worker.middleName}</td>
               <td key={generateKey(worker.lastName)}>{worker.lastName}</td>
               <td key={generateKey(worker.dateOfBirth)}>
                 {worker.dateOfBirth}

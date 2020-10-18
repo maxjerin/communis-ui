@@ -19,7 +19,7 @@ class Testimony extends React.Component {
     this.props.persist({ [fieldName]: e.target.value });
 
   render() {
-    const { details, previous, next } = this.props;
+    const { details, showNavigation, previous, next } = this.props;
 
     return (
       <Page>
@@ -48,14 +48,21 @@ class Testimony extends React.Component {
             </Row>
           </Col>
         </Row>
-        <Row>
-          <Col>
-            {previous} {next}
-          </Col>
-        </Row>
+        {showNavigation ? (
+          <Row>
+            <Col>
+              {previous} {next}
+            </Col>
+          </Row>
+        ) : null}
       </Page>
     );
   }
 }
+
+Testimony.defaultProps = {
+  testimony: '',
+  showNavigation: true,
+};
 
 export default withRouter(Testimony);

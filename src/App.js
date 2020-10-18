@@ -32,6 +32,7 @@ const MissionRegionList = React.lazy(() =>
 const MissionRegion = React.lazy(() => import('pages/mission/MissionRegion'));
 const WorkerList = React.lazy(() => import('pages/worker/WorkersList'));
 const AddWorkerWorkflow = React.lazy(() => import('pages/worker/AddWorker'));
+const WorkerProfile = React.lazy(() => import('pages/worker/WorkerProfile'));
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -109,6 +110,11 @@ class App extends React.Component {
                   exact
                   path="/workers"
                   component={withAuthContext(WorkerList)}
+                />
+                <Route
+                  exact
+                  path="/worker-profile/:id"
+                  component={withAuthContext(WorkerProfile)}
                 />
                 <Route
                   path="/add-worker"

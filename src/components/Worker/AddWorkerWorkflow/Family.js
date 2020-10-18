@@ -17,7 +17,7 @@ class Family extends React.Component {
     this.props.persist({ [fieldName]: e.target.value });
 
   render() {
-    const { details, previous, next } = this.props;
+    const { details, showNavigation, previous, next } = this.props;
 
     return (
       <Row>
@@ -63,14 +63,22 @@ class Family extends React.Component {
               </CardBody>
             </Card>
           </Row>
-          <Row>
-            <Col>{previous}</Col>
-            <Col>{next}</Col>
-          </Row>
+          {showNavigation ? (
+            <Row>
+              <Col>{previous}</Col>
+              <Col>{next}</Col>
+            </Row>
+          ) : null}
         </Col>
       </Row>
     );
   }
 }
+
+Family.defaultProps = {
+  familyName: '',
+  relationshipType: '',
+  showNavigation: true,
+};
 
 export default withRouter(Family);
