@@ -54,6 +54,13 @@ export const serializeWorker = worker => {
 };
 
 export const deserializeWorker = worker => {
+  let retrieveContact = (contacts, contactType) => {
+    return contacts
+      ? _.isEmpty(_.filter(contacts, contactType))
+        ? null
+        : _.filter(contacts, contactType)[0].value
+      : null;
+  };
   return {
     id: worker.id,
     personalDetails: {
@@ -62,31 +69,14 @@ export const deserializeWorker = worker => {
       lastName: worker.lastName,
       dateOfBirth: worker.dateOfBirth,
       gender: worker.gender,
-      cellPhone: worker.contacts
-        ? _.isEmpty(_.filter(worker.contacts, ['type', 'CELL_PHONE']))
-          ? null
-          : _.filter(worker.contacts, ['type', 'CELL_PHONE'])[0].value
-        : null,
-      homePhone: worker.contacts
-        ? _.isEmpty(_.filter(worker.contacts, ['type', 'HOME_PHONE']))
-          ? null
-          : _.filter(worker.contacts, ['type', 'HOME_PHONE'])[0].value
-        : null,
-      workPhone: worker.contacts
-        ? _.isEmpty(_.filter(worker.contacts, ['type', 'WORK_PHONE']))
-          ? null
-          : _.filter(worker.contacts, ['type', 'WORK_PHONE'])[0].value
-        : null,
-      email: worker.contacts
-        ? _.isEmpty(_.filter(worker.contacts, ['type', 'EMAIL']))
-          ? null
-          : _.filter(worker.contacts, ['type', 'EMAIL'])[0].value
-        : null,
-      secondaryEmail: worker.contacts
-        ? _.isEmpty(_.filter(worker.contacts, ['type', 'SECONDARY_EMAIL']))
-          ? null
-          : _.filter(worker.contacts, ['type', 'SECONDARY_EMAIL'])[0].value
-        : null,
+      cellPhone: retrieveContact(worker.contacts, ['type', 'CELL_PHONE']),
+      homePhone: retrieveContact(worker.contacts, ['type', 'HOME_PHONE']),
+      workPhone: retrieveContact(worker.contacts, ['type', 'WORK_PHONE']),
+      email: retrieveContact(worker.contacts, ['type', 'EMAIL']),
+      secondaryEmail: retrieveContact(worker.contacts, [
+        'type',
+        'SECONDARY_EMAIL',
+      ]),
       primaryContactType: worker.contacts
         ? _.filter(worker.contacts, ['primary', true])[0].type
         : null,
