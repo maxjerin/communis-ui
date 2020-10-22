@@ -63,19 +63,29 @@ export const deserializeWorker = worker => {
       dateOfBirth: worker.dateOfBirth,
       gender: worker.gender,
       cellPhone: worker.contacts
-        ? _.filter(worker.contacts, ['type', 'CELL_PHONE'])[0].value
+        ? _.isEmpty(_.filter(worker.contacts, ['type', 'CELL_PHONE']))
+          ? null
+          : _.filter(worker.contacts, ['type', 'CELL_PHONE'])[0].value
         : null,
       homePhone: worker.contacts
-        ? _.filter(worker.contacts, ['type', 'HOME_PHONE'])[0].value
+        ? _.isEmpty(_.filter(worker.contacts, ['type', 'HOME_PHONE']))
+          ? null
+          : _.filter(worker.contacts, ['type', 'HOME_PHONE'])[0].value
         : null,
       workPhone: worker.contacts
-        ? _.filter(worker.contacts, ['type', 'WORK_PHONE'])[0].value
+        ? _.isEmpty(_.filter(worker.contacts, ['type', 'WORK_PHONE']))
+          ? null
+          : _.filter(worker.contacts, ['type', 'WORK_PHONE'])[0].value
         : null,
       email: worker.contacts
-        ? _.filter(worker.contacts, ['type', 'EMAIL'])[0].value
+        ? _.isEmpty(_.filter(worker.contacts, ['type', 'EMAIL']))
+          ? null
+          : _.filter(worker.contacts, ['type', 'EMAIL'])[0].value
         : null,
       secondaryEmail: worker.contacts
-        ? _.filter(worker.contacts, ['type', 'SECONDARY_EMAIL'])[0].value
+        ? _.isEmpty(_.filter(worker.contacts, ['type', 'SECONDARY_EMAIL']))
+          ? null
+          : _.filter(worker.contacts, ['type', 'SECONDARY_EMAIL'])[0].value
         : null,
       primaryContactType: worker.contacts
         ? _.filter(worker.contacts, ['primary', true])[0].type
