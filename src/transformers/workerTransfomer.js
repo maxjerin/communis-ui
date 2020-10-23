@@ -55,10 +55,11 @@ export const serializeWorker = worker => {
 
 export const deserializeWorker = worker => {
   let retrieveContact = (contacts, contactType) => {
+    let typeAndContactType = ['type', contactType];
     return contacts
-      ? _.isEmpty(_.filter(contacts, contactType))
+      ? _.isEmpty(_.filter(contacts, typeAndContactType))
         ? null
-        : _.filter(contacts, contactType)[0].value
+        : _.filter(contacts, typeAndContactType)[0].value
       : null;
   };
   return {
@@ -69,14 +70,11 @@ export const deserializeWorker = worker => {
       lastName: worker.lastName,
       dateOfBirth: worker.dateOfBirth,
       gender: worker.gender,
-      cellPhone: retrieveContact(worker.contacts, ['type', 'CELL_PHONE']),
-      homePhone: retrieveContact(worker.contacts, ['type', 'HOME_PHONE']),
-      workPhone: retrieveContact(worker.contacts, ['type', 'WORK_PHONE']),
-      email: retrieveContact(worker.contacts, ['type', 'EMAIL']),
-      secondaryEmail: retrieveContact(worker.contacts, [
-        'type',
-        'SECONDARY_EMAIL',
-      ]),
+      cellPhone: retrieveContact(worker.contacts, 'CELL_PHONE'),
+      homePhone: retrieveContact(worker.contacts, 'HOME_PHONE'),
+      workPhone: retrieveContact(worker.contacts, 'WORK_PHONE'),
+      email: retrieveContact(worker.contacts, 'EMAIL'),
+      secondaryEmail: retrieveContact(worker.contacts, 'SECONDARY_EMAIL'),
       primaryContactType: worker.contacts
         ? _.filter(worker.contacts, ['primary', true])[0].type
         : null,
