@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
   workflow: {
     hasFamilyPage: false,
     currentWorkflowPage: null,
@@ -97,6 +97,12 @@ const reducer = (state = initialState, action) => {
           ...state.workflow,
           currentWorkflowPage: payload,
         },
+      };
+    }
+    case 'SET_SELECTED_WORKER': {
+      return {
+        ...state,
+        worker: payload,
       };
     }
     case 'RESET_WORKER_WORKFLOW': {

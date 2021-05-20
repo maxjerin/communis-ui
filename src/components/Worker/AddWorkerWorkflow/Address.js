@@ -19,7 +19,7 @@ class Address extends React.Component {
     this.props.persist({ [fieldName]: e.target.value });
 
   render() {
-    const { countries, details, previous, next } = this.props;
+    const { countries, details, showNavigation, previous, next } = this.props;
 
     return (
       <Page>
@@ -114,14 +114,26 @@ class Address extends React.Component {
             </Row>
           </Col>
         </Row>
-        <Row>
-          <Col>
-            {previous} {next}
-          </Col>
-        </Row>
+        {showNavigation ? (
+          <Row>
+            <Col>
+              {previous} {next}
+            </Col>
+          </Row>
+        ) : null}
       </Page>
     );
   }
 }
+
+Address.defaultProps = {
+  addressLine1: '',
+  addressLine2: '',
+  city: '',
+  state: '',
+  areaCode: '',
+  country: '',
+  showNavigation: true,
+};
 
 export default withRouter(Address);

@@ -18,11 +18,7 @@ class PersonalDetails extends React.Component {
     this.props.persist({ [fieldName]: e.target.value });
 
   render() {
-    const { details, previous, next } = this.props;
-
-    if (!details.primaryContactType) {
-      details.primaryContactType = 'Cell Phone';
-    }
+    const { details, showNavigation, previous, next } = this.props;
 
     return (
       //<Page title="Personal Details & Contact Information" breadcrumbs={[{ name: '', active: false }]>
@@ -31,7 +27,7 @@ class PersonalDetails extends React.Component {
         <Row>
           <Col xl={6} lg={12} md={12}>
             <Card>
-              <CardHeader>Input Types</CardHeader>
+              <CardHeader>Personal Details</CardHeader>
               <CardBody>
                 <Form>
                   <FormGroup>
@@ -103,7 +99,7 @@ class PersonalDetails extends React.Component {
           </Col>
           <Col xl={6} lg={12} md={12}>
             <Card>
-              <CardHeader>Input Types</CardHeader>
+              <CardHeader>Contact Information</CardHeader>
               <CardBody>
                 <Form>
                   <Row>
@@ -182,11 +178,12 @@ class PersonalDetails extends React.Component {
                       onChange={e => this.persistField(e, 'primaryContactType')}
                       value={details.primaryContactType}
                     >
-                      <option>Cell Phone</option>
-                      <option>Home Phone</option>
-                      <option>Work Phone</option>
-                      <option>Primary Email</option>
-                      <option>Secondary Email</option>
+                      <option value={''}>Select Primary Contact Type</option>
+                      <option value={'CELL_PHONE'}>Cell Phone</option>
+                      <option value={'HOME_PHONE'}>Home Phone</option>
+                      <option value={'WORK_PHONE'}>Work Phone</option>
+                      <option value={'EMAIL'}>Email</option>
+                      <option value={'SECONDARY_EMAIL'}>Secondary Email</option>
                     </Input>
                   </FormGroup>
                 </Form>
@@ -194,20 +191,37 @@ class PersonalDetails extends React.Component {
             </Card>
           </Col>
         </Row>
-        <Row>
-          <Col></Col>
-          <Col>
-            <Row>
-              <Col></Col>
-              <Col>
-                {previous} {next}
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+        {showNavigation ? (
+          <Row>
+            <Col></Col>
+            <Col>
+              <Row>
+                <Col></Col>
+                <Col>
+                  {previous} {next}
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        ) : null}
       </Page>
     );
   }
 }
+
+PersonalDetails.defaultProps = {
+  firstName: '',
+  middleName: '',
+  lastName: '',
+  dateOfBirth: '',
+  gender: '',
+  cellPhone: '',
+  homePhone: '',
+  workPhone: '',
+  email: '',
+  secondaryEmail: '',
+  primaryContactType: '',
+  showNavigation: true,
+};
 
 export default withRouter(PersonalDetails);
